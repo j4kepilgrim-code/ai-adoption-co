@@ -9,193 +9,193 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 
-/* ── PAGE ── */
 body {
-  background-color: #ffffff;
+  background-color: #fff;
   background-image:
     linear-gradient(#e2e8f0 1px, transparent 1px),
     linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-.levels-page {
+/* ── LAYOUT ── */
+.levels-outer {
+  display: grid;
+  grid-template-columns: 300px 1fr;
   min-height: calc(100vh - 60px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px 80px;
+  max-width: 1060px;
+  margin: 0 auto;
 }
 
-.pyramid-eyebrow {
+/* ── LEFT COLUMN ── */
+.levels-left {
+  padding: 56px 32px 56px 40px;
+  border-right: 1px solid #e8edf2;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.levels-eyebrow {
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #c0b8ae;
-  margin-bottom: 48px;
-  text-align: center;
+  letter-spacing: 0.18em;
+  color: #c8c0b8;
   font-weight: 500;
+  margin-bottom: 20px;
 }
 
-/* ── PYRAMID ── */
-.pyramid {
-  width: 100%;
-  max-width: 780px;
+/* ── LEVEL BLOCK ── */
+[data-level="0"] { --lc: #93c5fd; }
+[data-level="1"] { --lc: #60a5fa; }
+[data-level="2"] { --lc: #3b82f6; }
+[data-level="3"] { --lc: #2563eb; }
+[data-level="4"] { --lc: #1d4ed8; }
+[data-level="5"] { --lc: #1e3a8a; }
+
+.level-block {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 6px 6px 0 var(--lc);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+              background 0.2s ease, border-color 0.18s ease;
+}
+.level-block:hover {
+  border-color: var(--lc);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--lc);
+}
+.level-block.active {
+  background: var(--lc);
+  border-color: transparent;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.18);
+}
+
+.lb-num {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--lc);
+  min-width: 32px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.level-block.active .lb-num { color: rgba(255,255,255,0.65); }
+
+.lb-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #0f0e0c;
+  transition: color 0.2s;
+}
+.level-block.active .lb-name { color: #fff; }
+
+/* ── RIGHT PANEL ── */
+.levels-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 56px;
+  position: relative;
+}
+
+.panel-idle {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  /* room for hard box-shadow */
-  padding-right: 16px;
-  padding-bottom: 16px;
-}
-
-[data-level="5"] { width: 37%; }
-[data-level="4"] { width: 51%; }
-[data-level="3"] { width: 65%; }
-[data-level="2"] { width: 79%; }
-[data-level="1"] { width: 91%; }
-[data-level="0"] { width: 100%; }
-
-/* Level colours */
-[data-level="0"] { --lc: #94a3b8; }
-[data-level="1"] { --lc: #64748b; }
-[data-level="2"] { --lc: #38bdf8; }
-[data-level="3"] { --lc: #8b5cf6; }
-[data-level="4"] { --lc: #fb923c; }
-[data-level="5"] { --lc: #e8a07a; }
-
-/* ── LEVEL BAND ── */
-.level-band {
-  position: relative;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 7px;
-  padding: 20px 24px 20px 28px;
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  cursor: pointer;
-  user-select: none;
-  /* Hard zero-blur shadow = coloured depth face */
-  box-shadow: 6px 6px 0 var(--lc);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.18s ease;
-}
-
-/* ── HOVER ── */
-.level-band:hover {
-  border-color: var(--lc);
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 var(--lc);
-}
-
-/* ── OPEN (clicked) ── */
-.level-band.open {
-  border-color: var(--lc);
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 var(--lc);
-}
-
-/* ── CONTENT ── */
-.level-num {
-  font-size: 36px;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  color: var(--lc);
-  opacity: 0.55;
-  flex-shrink: 0;
-  min-width: 48px;
-  line-height: 1;
-  padding-top: 2px;
-  transition: color 0.22s ease, opacity 0.22s ease;
-}
-.level-band:hover .level-num,
-.level-band.open .level-num {
-  color: var(--lc);
-  opacity: 1;
-}
-
-.level-body { flex: 1; min-width: 0; }
-.level-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 12px;
+  transition: opacity 0.2s;
 }
-.level-text { flex: 1; min-width: 0; }
-
-/* Shimmer on name — default state only */
-.level-name {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-size: 19px;
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 5px;
-  /* gradient shimmer */
-  background: linear-gradient(135deg, var(--lc) 0%, #0f0e0c 42%, var(--lc) 100%);
-  background-size: 250% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 5s linear infinite;
-}
-.level-band:hover .level-name,
-.level-band.open .level-name {
-  animation-play-state: paused;
-}
-@keyframes shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
-}
-
-.level-desc {
-  font-size: 12.5px;
-  font-weight: 300;
-  color: #999;
-  line-height: 1.45;
-  transition: color 0.22s ease;
-}
-.level-band:hover .level-desc,
-.level-band.open .level-desc {
-  color: #666;
-}
-
-.level-toggle {
-  color: #d0c8bc;
+.panel-idle-arrow {
   font-size: 20px;
-  font-weight: 300;
-  flex-shrink: 0;
-  line-height: 1;
-  padding-top: 2px;
-  transition: transform 0.2s ease, color 0.22s ease;
+  color: #e2e0dc;
+  transform: rotate(180deg);
+  display: inline-block;
 }
-.level-band:hover .level-toggle { color: var(--lc); }
-.level-band.open .level-toggle {
-  transform: rotate(45deg);
-  color: var(--lc);
+.panel-idle-text {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d8d4ce;
 }
+.panel-idle.hidden { opacity: 0; pointer-events: none; }
 
-/* ── DETAIL ── */
-.level-detail {
+.level-panel {
   display: none;
-  padding-top: 14px;
-  margin-top: 14px;
-  border-top: 1px solid #f0f4f8;
-  font-size: 13.5px;
-  font-weight: 300;
-  color: #5a5248;
-  line-height: 1.72;
   width: 100%;
+  max-width: 420px;
 }
-.level-band.open .level-detail { display: block; }
+.level-panel.visible {
+  display: block;
+  animation: panelIn 0.28s ease;
+}
+@keyframes panelIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
 
-/* ── BOTTOM LINK ── */
-.pyramid-footer {
-  margin-top: 52px;
+.panel-inner {
+  background: #f5f7fa;
+  border: 1px solid #e8edf2;
+  border-radius: 8px;
+  padding: 48px 40px 44px;
   text-align: center;
 }
-.pyramid-footer a {
+
+.panel-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.panel-level-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  color: var(--panel-lc, #3b82f6);
+  margin-bottom: 8px;
+}
+.panel-name {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #0f0e0c;
+  margin-bottom: 18px;
+}
+.panel-detail {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5a5248;
+  line-height: 1.78;
+  text-align: left;
+}
+
+/* bottom link */
+.levels-footer-link {
+  padding: 24px 40px;
+  border-top: 1px solid #e8edf2;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.levels-footer-link a {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -206,17 +206,17 @@ body {
   gap: 8px;
   transition: color 0.2s;
 }
-.pyramid-footer a:hover { color: #0f0e0c; }
-.pf-arrow { display: inline-block; transition: transform 0.2s; }
-.pyramid-footer a:hover .pf-arrow { transform: translateX(4px); }
+.levels-footer-link a:hover { color: #0f0e0c; }
+.lf-arrow { display: inline-block; transition: transform 0.2s; }
+.levels-footer-link a:hover .lf-arrow { transform: translateX(4px); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  [data-level] { width: 100% !important; }
-  .pyramid { padding-right: 10px; padding-bottom: 10px; }
-  .levels-page { padding: 44px 16px 64px; }
-  .level-num { font-size: 28px; min-width: 38px; }
-  .level-name { font-size: 17px; }
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .levels-outer { grid-template-columns: 1fr; }
+  .levels-left { padding: 40px 20px; border-right: none; border-bottom: 1px solid #e8edf2; }
+  .levels-right { padding: 40px 20px; }
+  .panel-idle { display: none; }
+  .level-panel { max-width: 100%; }
 }
 </style>
 </head>
@@ -231,114 +231,61 @@ body {
   </div>
 </nav>
 
-<div class="levels-page">
+<div class="levels-outer">
 
-  <div class="pyramid-eyebrow">AI Maturity · Level 0 → 5</div>
+  <!-- LEFT: blocks -->
+  <div class="levels-left">
+    <div class="levels-eyebrow">AI Maturity · 0 → 5</div>
 
-  <div class="pyramid">
+    <div class="level-block" data-level="0" onclick="selectLevel(0)">
+      <div class="lb-num">0</div>
+      <div class="lb-name">Passenger</div>
+    </div>
+    <div class="level-block" data-level="1" onclick="selectLevel(1)">
+      <div class="lb-num">1</div>
+      <div class="lb-name">Driver</div>
+    </div>
+    <div class="level-block" data-level="2" onclick="selectLevel(2)">
+      <div class="lb-num">2</div>
+      <div class="lb-name">Builder</div>
+    </div>
+    <div class="level-block" data-level="3" onclick="selectLevel(3)">
+      <div class="lb-num">3</div>
+      <div class="lb-name">Connector</div>
+    </div>
+    <div class="level-block" data-level="4" onclick="selectLevel(4)">
+      <div class="lb-num">4</div>
+      <div class="lb-name">Architect</div>
+    </div>
+    <div class="level-block" data-level="5" onclick="selectLevel(5)">
+      <div class="lb-num">5</div>
+      <div class="lb-name">Champion</div>
+    </div>
+  </div>
 
-    <div class="level-band" data-level="5" onclick="toggleLevel(this)">
-      <div class="level-num">5</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Champion</div>
-            <div class="level-desc">Coaches peers. The internal AI lead.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Doesn't just use AI well — makes the organisation better at it. Coaches peers, spots what's next, keeps quality from degrading as usage scales. One or two Level 5 people in a 30-person team can change how the whole organisation works. After every Training Day, we identify these people by name.
-        </div>
-      </div>
+  <!-- RIGHT: panel -->
+  <div class="levels-right">
+
+    <div class="panel-idle" id="panel-idle">
+      <span class="panel-idle-arrow">→</span>
+      <span class="panel-idle-text">Select a level</span>
     </div>
 
-    <div class="level-band" data-level="4" onclick="toggleLevel(this)">
-      <div class="level-num">4</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Architect</div>
-            <div class="level-desc">Designs workflows others use. Thinks about inputs, outputs, owners, hand-offs.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Builds AI workflows for others to use, not just themselves. Makes AI adoption institutional rather than individual — turns a good prompt into a company-wide process. They're the reason we can leave and the work continues.
-        </div>
-      </div>
-    </div>
-
-    <div class="level-band" data-level="3" onclick="toggleLevel(this)">
-      <div class="level-num">3</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Connector</div>
-            <div class="level-desc">Connects the model to tools and data. Thinks in layers, not chat windows.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Treats AI as infrastructure rather than a conversation. Connects it to tools, data sources, and outputs that go somewhere useful. Thinks about where AI fits in the stack — not just what it can produce on its own.
-        </div>
-      </div>
-    </div>
-
-    <div class="level-band" data-level="2" onclick="toggleLevel(this)">
-      <div class="level-num">2</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Builder</div>
-            <div class="level-desc">Sets up persistent workspaces. Brings documents and examples in. Builds repeatable things.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Moving from ad hoc to systematic. Persistent workspaces, real documents, real instructions — producing the same output reliably every time. Where AI stops being a novelty and starts being infrastructure. The Training Programme gets most teams here within 30 days.
-        </div>
-      </div>
-    </div>
-
-    <div class="level-band" data-level="1" onclick="toggleLevel(this)">
-      <div class="level-num">1</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Driver</div>
-            <div class="level-desc">Gets useful outputs regularly. Understands why quality varies. Iterates rather than gives up.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Understands that prompts are conversations, not commands. Has stopped asking "why didn't it work?" and started asking "how do I tell it more clearly?" Getting every person in the room here is the goal of Training Day.
-        </div>
-      </div>
-    </div>
-
-    <div class="level-band" data-level="0" onclick="toggleLevel(this)">
-      <div class="level-num">0</div>
-      <div class="level-body">
-        <div class="level-top">
-          <div class="level-text">
-            <div class="level-name">Passenger</div>
-            <div class="level-desc">Has the licence. Has the login. Not sure what to do with it.</div>
-          </div>
-          <div class="level-toggle">+</div>
-        </div>
-        <div class="level-detail">
-          Where most teams are after six months of paying for an enterprise plan. The problem isn't willingness — nobody's shown what genuinely useful output looks like. Level 0 is also where we start.
-        </div>
+    <div class="level-panel" id="level-panel">
+      <div class="panel-inner">
+        <div class="panel-icon" id="panel-icon"></div>
+        <div class="panel-level-label" id="panel-label"></div>
+        <div class="panel-name" id="panel-name"></div>
+        <div class="panel-detail" id="panel-detail"></div>
       </div>
     </div>
 
   </div>
 
-  <div class="pyramid-footer">
-    <a href="offers.html">See how we move your team up the levels <span class="pf-arrow">→</span></a>
-  </div>
+</div>
 
+<div class="levels-footer-link">
+  <a href="offers.html">See how we move your team up the levels <span class="lf-arrow">→</span></a>
 </div>
 
 <footer class="site-footer">
@@ -348,11 +295,111 @@ body {
 </footer>
 
 <script>
-  function toggleLevel(band) {
-    const isOpen = band.classList.contains('open');
-    document.querySelectorAll('.level-band').forEach(b => b.classList.remove('open'));
-    if (!isOpen) band.classList.add('open');
+const levels = {
+  0: {
+    name: 'Passenger',
+    label: 'Level 0',
+    lc: '#93c5fd',
+    detail: 'Where most teams are after six months of paying for an enterprise plan. The tool is there, the licence paid for — but nobody\'s done more than draft an email and close the tab. The problem isn\'t willingness. Nobody\'s been shown what genuinely useful output looks like.',
+    icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
+    </svg>`
+  },
+  1: {
+    name: 'Driver',
+    label: 'Level 1',
+    lc: '#60a5fa',
+    detail: 'Gets useful outputs regularly. Understands that prompts are conversations, not commands — and that the first output is rarely the final one. Has stopped asking "why didn\'t it work?" and started asking "how do I tell it more clearly?" Getting every person here is the goal of Training Day.',
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <line x1="6" y1="24" x2="42" y2="24"/>
+      <polyline points="30,12 42,24 30,36"/>
+    </svg>`
+  },
+  2: {
+    name: 'Builder',
+    label: 'Level 2',
+    lc: '#3b82f6',
+    detail: 'Moving from ad hoc to systematic. Persistent project workspaces, real documents, real instructions — producing the same output reliably every time. Where AI stops being a novelty and starts being infrastructure. The Training Programme gets most teams here within 30 days.',
+    icon: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="32" width="36" height="6" rx="1.5" fill="currentColor"/>
+      <rect x="6" y="22" width="28" height="6" rx="1.5" fill="currentColor" opacity="0.65"/>
+      <rect x="6" y="12" width="20" height="6" rx="1.5" fill="currentColor" opacity="0.35"/>
+    </svg>`
+  },
+  3: {
+    name: 'Connector',
+    label: 'Level 3',
+    lc: '#2563eb',
+    detail: 'Treats AI as infrastructure rather than a conversation. Connects it to tools, data sources, and outputs that go somewhere useful. Thinks about where AI fits in the stack, not just what it can produce on its own. Less common, but often the first to emerge after a Training Day.',
+    icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="24" r="5" fill="currentColor"/>
+      <circle cx="40" cy="24" r="5" fill="currentColor"/>
+      <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/>
+      <line x1="13" y1="24" x2="20" y2="24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="28" y1="24" x2="35" y2="24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>`
+  },
+  4: {
+    name: 'Architect',
+    label: 'Level 4',
+    lc: '#1d4ed8',
+    detail: 'Builds AI workflows for others to use, not just themselves. Thinks about inputs, outputs, owners, hand-offs, and quality from the start. Makes AI adoption institutional rather than individual — turns a good prompt into a company-wide process. The reason we can leave and the work continues.',
+    icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+      <line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+      <path d="M24 10 L38 24 L24 38 L10 24 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="24" cy="24" r="3.5" fill="currentColor"/>
+    </svg>`
+  },
+  5: {
+    name: 'Champion',
+    label: 'Level 5',
+    lc: '#1e3a8a',
+    detail: 'Doesn\'t just use AI well — makes the organisation better at it. Coaches peers, spots what\'s next, keeps quality from degrading as usage scales. One or two Level 5 people in a 30-person team can change how the whole organisation works. After every Training Day, we identify these people by name.',
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 6 l4.94 10.02 11.06 1.61 -8 7.8 1.89 11.01 L24 31.5 l-9.89 5.2 1.89-11.01 -8-7.8 11.06-1.61 Z"/>
+    </svg>`
   }
+};
+
+function selectLevel(num) {
+  const data = levels[num];
+
+  // update blocks
+  document.querySelectorAll('.level-block').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-level="${num}"]`).classList.add('active');
+
+  // update panel
+  const panel      = document.getElementById('level-panel');
+  const idle       = document.getElementById('panel-idle');
+  const icon       = document.getElementById('panel-icon');
+  const label      = document.getElementById('panel-label');
+  const name       = document.getElementById('panel-name');
+  const detail     = document.getElementById('panel-detail');
+  const panelInner = document.querySelector('.panel-inner');
+
+  // fade out, swap, fade in
+  panel.style.opacity = '0';
+  panel.style.transition = 'opacity 0.15s';
+
+  setTimeout(() => {
+    icon.innerHTML   = data.icon;
+    icon.style.color = data.lc;
+    label.textContent = data.label;
+    label.style.setProperty('--panel-lc', data.lc);
+    label.style.color = data.lc;
+    name.textContent  = data.name;
+    detail.textContent = data.detail;
+
+    idle.classList.add('hidden');
+    panel.classList.add('visible');
+    panel.style.opacity = '1';
+    panel.style.animation = 'panelIn 0.28s ease';
+
+    // reset animation
+    void panel.offsetWidth;
+  }, 150);
+}
 </script>
 </body>
 </html>
