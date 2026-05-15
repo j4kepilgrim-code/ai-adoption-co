@@ -19,7 +19,7 @@
 
   /* ── LANDING ── */
   #landing {
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,18 +40,8 @@
     background-size: 48px 48px;
     opacity: 0.45;
   }
-  #landing::after {
-    content: '';
-    position: absolute;
-    top: -20%; left: 50%; transform: translateX(-50%);
-    width: 80%; height: 100%;
-    background: radial-gradient(ellipse at center, rgba(99,132,241,0.06) 0%, transparent 65%);
-    z-index: 0;
-    pointer-events: none;
-  }
-  #landing > * { position: relative; z-index: 1; }
 
-  .nav-contact {
+  #landing .nav-contact {
     position: absolute;
     top: 28px;
     right: 32px;
@@ -60,6 +50,7 @@
     text-decoration: none;
     letter-spacing: 0.04em;
     transition: color 0.15s;
+    z-index: 3;
   }
   .nav-contact:hover { color: #0f0e0c; }
 
@@ -70,6 +61,8 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
+    position: relative;
+    z-index: 2;
   }
 
   .brand-lockup {
@@ -371,16 +364,23 @@
     .chain-display { padding: 26px 22px; }
     .deliverables { grid-template-columns: 1fr; }
     .cta-block { flex-direction: column; align-items: flex-start; padding: 34px 28px; }
-    .headline-line1, .headline-line2 { font-size: 28px; }
   }
 </style>
 </head>
 <body>
 
+<nav style="position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:60px;">
+  <a href="index.html" style="font-size:13px;font-weight:600;letter-spacing:-0.015em;text-decoration:none;color:#0f0e0c;">AI Adoption Co</a>
+  <div style="display:flex;gap:28px;align-items:center;">
+    <a href="levels.html" style="font-size:12px;color:#999;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#0f0e0c'" onmouseout="this.style.color='#999'">The Levels</a>
+    <a href="offers.html" style="font-size:12px;color:#999;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#0f0e0c'" onmouseout="this.style.color='#999'">Our Offers</a>
+    <a href="mailto:j4kepilgrim@gmail.com" style="background:#0f0e0c;color:#fff;padding:7px 16px;border-radius:999px;font-size:11px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;">Get in touch</a>
+  </div>
+</nav>
+
 <!-- SCREEN 1: LANDING -->
 <div id="landing">
 
-  <a href="mailto:j4kepilgrim@gmail.com" class="nav-contact">Get in touch</a>
 
   <div class="landing-cluster">
 
@@ -390,17 +390,17 @@
     </div>
 
     <div class="search-area">
-      <div class="input-rail" onclick="goToOffer()">
-      <button class="rail-icon-btn" type="button" aria-label="Add" onclick="goToOffer()">+</button>
+      <div class="input-rail" onclick="goToOffers()">
+      <button class="rail-icon-btn" type="button" aria-label="Add" onclick="goToOffers()">+</button>
       <div class="rail-body">
         <span id="typed-prompt"></span><span class="p-cursor"></span>
       </div>
-      <button class="rail-icon-btn" type="button" aria-label="Voice" onclick="goToOffer()">
+      <button class="rail-icon-btn" type="button" aria-label="Voice" onclick="goToOffers()">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
           <path d="M12 14a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v4a3 3 0 0 0 3 3zm5-3a1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V20h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-2.08A7 7 0 0 1 5 11a1 1 0 1 1 2 0 5 5 0 0 0 10 0z" fill="currentColor"/>
         </svg>
       </button>
-      <button class="submit-btn" type="button" onclick="goToOffer()" aria-label="See the engagement">
+      <button class="submit-btn" type="button" onclick="goToOffers()" aria-label="See the engagement">
         <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="8" y1="13" x2="8" y2="3"/>
           <polyline points="4,7 8,3 12,7"/>
@@ -616,7 +616,10 @@
 
   typewriter(document.getElementById('typed-prompt'), searchPrompts, { typeMs: 52, deleteMs: 22, pauseMs: 1900, pauseEmptyMs: 300 });
 
-  /* ── SCREEN TRANSITIONS ── */
+  /* ── NAVIGATION ── */
+  function goToOffers() {
+    window.location.href = 'offers.html';
+  }
   function goToOffer() {
     const landing = document.getElementById('landing');
     const offer   = document.getElementById('offer');

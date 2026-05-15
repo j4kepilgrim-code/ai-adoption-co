@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Levels — AI Adoption Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+/* ── PAGE ── */
+body {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.levels-page {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 80px;
+}
+
+.pyramid-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #c0b8ae;
+  margin-bottom: 48px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ── PYRAMID ── */
+.pyramid {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* room for hard box-shadow */
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+[data-level="5"] { width: 37%; }
+[data-level="4"] { width: 51%; }
+[data-level="3"] { width: 65%; }
+[data-level="2"] { width: 79%; }
+[data-level="1"] { width: 91%; }
+[data-level="0"] { width: 100%; }
+
+/* Level colours */
+[data-level="0"] { --lc: #94a3b8; }
+[data-level="1"] { --lc: #64748b; }
+[data-level="2"] { --lc: #38bdf8; }
+[data-level="3"] { --lc: #8b5cf6; }
+[data-level="4"] { --lc: #fb923c; }
+[data-level="5"] { --lc: #e8a07a; }
+
+/* ── LEVEL BAND ── */
+.level-band {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  padding: 20px 24px 20px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  cursor: pointer;
+  user-select: none;
+  /* Hard zero-blur shadow = coloured depth face */
+  box-shadow: 6px 6px 0 var(--lc);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.18s ease;
+}
+
+/* ── HOVER ── */
+.level-band:hover {
+  border-color: var(--lc);
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--lc);
+}
+
+/* ── OPEN (clicked) ── */
+.level-band.open {
+  border-color: var(--lc);
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--lc);
+}
+
+/* ── CONTENT ── */
+.level-num {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--lc);
+  opacity: 0.55;
+  flex-shrink: 0;
+  min-width: 48px;
+  line-height: 1;
+  padding-top: 2px;
+  transition: color 0.22s ease, opacity 0.22s ease;
+}
+.level-band:hover .level-num,
+.level-band.open .level-num {
+  color: var(--lc);
+  opacity: 1;
+}
+
+.level-body { flex: 1; min-width: 0; }
+.level-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.level-text { flex: 1; min-width: 0; }
+
+/* Shimmer on name — default state only */
+.level-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 5px;
+  /* gradient shimmer */
+  background: linear-gradient(135deg, var(--lc) 0%, #0f0e0c 42%, var(--lc) 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+.level-band:hover .level-name,
+.level-band.open .level-name {
+  animation-play-state: paused;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.level-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #999;
+  line-height: 1.45;
+  transition: color 0.22s ease;
+}
+.level-band:hover .level-desc,
+.level-band.open .level-desc {
+  color: #666;
+}
+
+.level-toggle {
+  color: #d0c8bc;
+  font-size: 20px;
+  font-weight: 300;
+  flex-shrink: 0;
+  line-height: 1;
+  padding-top: 2px;
+  transition: transform 0.2s ease, color 0.22s ease;
+}
+.level-band:hover .level-toggle { color: var(--lc); }
+.level-band.open .level-toggle {
+  transform: rotate(45deg);
+  color: var(--lc);
+}
+
+/* ── DETAIL ── */
+.level-detail {
+  display: none;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid #f0f4f8;
+  font-size: 13.5px;
+  font-weight: 300;
+  color: #5a5248;
+  line-height: 1.72;
+  width: 100%;
+}
+.level-band.open .level-detail { display: block; }
+
+/* ── BOTTOM LINK ── */
+.pyramid-footer {
+  margin-top: 52px;
+  text-align: center;
+}
+.pyramid-footer a {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #bbb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.pyramid-footer a:hover { color: #0f0e0c; }
+.pf-arrow { display: inline-block; transition: transform 0.2s; }
+.pyramid-footer a:hover .pf-arrow { transform: translateX(4px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  [data-level] { width: 100% !important; }
+  .pyramid { padding-right: 10px; padding-bottom: 10px; }
+  .levels-page { padding: 44px 16px 64px; }
+  .level-num { font-size: 28px; min-width: 38px; }
+  .level-name { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="site-nav-logo">AI Adoption Co</a>
+  <div class="site-nav-links">
+    <a href="levels.html" class="active">The Levels</a>
+    <a href="offers.html">Our Offers</a>
+    <a href="mailto:j4kepilgrim@gmail.com" class="nav-pill">Get in touch</a>
+  </div>
+</nav>
+
+<div class="levels-page">
+
+  <div class="pyramid-eyebrow">AI Maturity · Level 0 → 5</div>
+
+  <div class="pyramid">
+
+    <div class="level-band" data-level="5" onclick="toggleLevel(this)">
+      <div class="level-num">5</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Champion</div>
+            <div class="level-desc">Coaches peers. The internal AI lead.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Doesn't just use AI well — makes the organisation better at it. Coaches peers, spots what's next, keeps quality from degrading as usage scales. One or two Level 5 people in a 30-person team can change how the whole organisation works. After every Training Day, we identify these people by name.
+        </div>
+      </div>
+    </div>
+
+    <div class="level-band" data-level="4" onclick="toggleLevel(this)">
+      <div class="level-num">4</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Architect</div>
+            <div class="level-desc">Designs workflows others use. Thinks about inputs, outputs, owners, hand-offs.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Builds AI workflows for others to use, not just themselves. Makes AI adoption institutional rather than individual — turns a good prompt into a company-wide process. They're the reason we can leave and the work continues.
+        </div>
+      </div>
+    </div>
+
+    <div class="level-band" data-level="3" onclick="toggleLevel(this)">
+      <div class="level-num">3</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Connector</div>
+            <div class="level-desc">Connects the model to tools and data. Thinks in layers, not chat windows.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Treats AI as infrastructure rather than a conversation. Connects it to tools, data sources, and outputs that go somewhere useful. Thinks about where AI fits in the stack — not just what it can produce on its own.
+        </div>
+      </div>
+    </div>
+
+    <div class="level-band" data-level="2" onclick="toggleLevel(this)">
+      <div class="level-num">2</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Builder</div>
+            <div class="level-desc">Sets up persistent workspaces. Brings documents and examples in. Builds repeatable things.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Moving from ad hoc to systematic. Persistent workspaces, real documents, real instructions — producing the same output reliably every time. Where AI stops being a novelty and starts being infrastructure. The Training Programme gets most teams here within 30 days.
+        </div>
+      </div>
+    </div>
+
+    <div class="level-band" data-level="1" onclick="toggleLevel(this)">
+      <div class="level-num">1</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Driver</div>
+            <div class="level-desc">Gets useful outputs regularly. Understands why quality varies. Iterates rather than gives up.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Understands that prompts are conversations, not commands. Has stopped asking "why didn't it work?" and started asking "how do I tell it more clearly?" Getting every person in the room here is the goal of Training Day.
+        </div>
+      </div>
+    </div>
+
+    <div class="level-band" data-level="0" onclick="toggleLevel(this)">
+      <div class="level-num">0</div>
+      <div class="level-body">
+        <div class="level-top">
+          <div class="level-text">
+            <div class="level-name">Passenger</div>
+            <div class="level-desc">Has the licence. Has the login. Not sure what to do with it.</div>
+          </div>
+          <div class="level-toggle">+</div>
+        </div>
+        <div class="level-detail">
+          Where most teams are after six months of paying for an enterprise plan. The problem isn't willingness — nobody's shown what genuinely useful output looks like. Level 0 is also where we start.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pyramid-footer">
+    <a href="offers.html">See how we move your team up the levels <span class="pf-arrow">→</span></a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="footer-logo">AI Adoption Co</span>
+  <span class="footer-tagline">We help your team actually use AI.</span>
+  <a href="mailto:j4kepilgrim@gmail.com" class="footer-contact">j4kepilgrim@gmail.com</a>
+</footer>
+
+<script>
+  function toggleLevel(band) {
+    const isOpen = band.classList.contains('open');
+    document.querySelectorAll('.level-band').forEach(b => b.classList.remove('open'));
+    if (!isOpen) band.classList.add('open');
+  }
+</script>
+</body>
+</html>
