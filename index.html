@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Adoption Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #ffffff;
+    color: #0f0e0c;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── LANDING ── */
+  #landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    position: relative;
+    background: #ffffff;
+  }
+  #landing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(#e2e8f0 1px, transparent 1px),
+      linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.45;
+  }
+  #landing::after {
+    content: '';
+    position: absolute;
+    top: -20%; left: 50%; transform: translateX(-50%);
+    width: 80%; height: 100%;
+    background: radial-gradient(ellipse at center, rgba(99,132,241,0.06) 0%, transparent 65%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  #landing > * { position: relative; z-index: 1; }
+
+  .nav-contact {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    font-size: 12px;
+    color: #bbb;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .nav-contact:hover { color: #0f0e0c; }
+
+  /* Centered cluster */
+  .landing-cluster {
+    width: 100%;
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .brand-lockup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .brand-name {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #0f0e0c;
+  }
+
+  .brand-tagline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(17px, 2vw, 21px);
+    font-weight: 400;
+    color: #888;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Input rail */
+  .search-area {
+    width: 100%;
+  }
+
+  .input-rail {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 44px 1fr 36px 44px;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.09);
+    border-radius: 999px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+    min-height: 58px;
+    padding: 0 8px 0 4px;
+    gap: 0;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .input-rail:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.11), 0 1px 4px rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.15);
+  }
+
+  .rail-icon-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .rail-icon-btn:hover { color: #0f0e0c; }
+
+  .rail-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: #444;
+    padding: 4px 6px;
+    line-height: 1.5;
+  }
+
+  .p-cursor {
+    display: inline-block;
+    width: 1.5px;
+    height: 1em;
+    background: #c8b090;
+    margin-left: 1px;
+    vertical-align: middle;
+    animation: blink 0.9s step-end infinite;
+  }
+
+  .submit-btn {
+    width: 36px;
+    height: 36px;
+    background: #0f0e0c;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .submit-btn:hover { background: #333; transform: scale(1.06); }
+  .submit-btn svg { width: 14px; height: 14px; }
+
+
+  /* ── OFFER PAGE ── */
+  #offer {
+    display: none;
+    background: #f1f5f9;
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  .offer-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(241,245,249,0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .back-btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9a9080;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .back-btn:hover { color: #0e0c0a; }
+  .nav-wordmark-offer {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #9a9080;
+  }
+
+  .offer-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 72px 28px 0;
+  }
+
+  .offer-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #b0a898;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .offer-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 6vw, 54px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: #0e0c0a;
+    margin-bottom: 22px;
+  }
+  .offer-intro {
+    font-size: 16px;
+    font-weight: 300;
+    color: #5a5248;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 48px;
+  }
+  .offer-meta {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    padding: 22px 0;
+    border-top: 1px solid #d8e2ec;
+    border-bottom: 1px solid #d8e2ec;
+    margin-bottom: 68px;
+  }
+  .offer-meta .m-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #c0b8ae;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .offer-meta .m-val { font-size: 14px; font-weight: 500; color: #0e0c0a; }
+
+  .section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #c0b8ae;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .offer-section { margin-bottom: 68px; }
+
+  /* Accordion */
+  .phases { display: flex; flex-direction: column; gap: 4px; }
+  .phase-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 24px 26px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+  .phase-card:hover { border-color: #c8bfb4; box-shadow: 0 2px 10px rgba(14,12,10,0.05); }
+  .phase-card.open { border-color: #0e0c0a; box-shadow: 0 2px 14px rgba(14,12,10,0.08); }
+  .phase-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .phase-week { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #c0b8ae; font-weight: 500; margin-bottom: 5px; }
+  .phase-name { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 400; color: #0e0c0a; }
+  .phase-toggle { color: #c8bfb4; font-size: 22px; font-weight: 300; transition: transform 0.2s ease, color 0.15s; flex-shrink: 0; line-height: 1; }
+  .phase-card.open .phase-toggle { transform: rotate(45deg); color: #0e0c0a; }
+  .phase-detail { display: none; padding-top: 20px; margin-top: 20px; border-top: 1px solid #f0ebe2; font-size: 14px; color: #5a5248; line-height: 1.7; }
+  .phase-card.open .phase-detail { display: block; }
+  .phase-detail p { margin-bottom: 14px; }
+  .phase-detail ul { list-style: none; padding: 0; margin: 8px 0; }
+  .phase-detail ul li { padding: 5px 0 5px 20px; position: relative; font-size: 13.5px; color: #5a5248; }
+  .phase-detail ul li::before { content: "—"; position: absolute; left: 0; color: #d0c8bc; }
+  .phase-detail strong { color: #0e0c0a; font-weight: 500; }
+
+  /* Chain */
+  .chain-display { background: #0e0c0a; border-radius: 8px; padding: 36px 40px; }
+  .chain-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #4a4540; font-weight: 500; margin-bottom: 22px; }
+  .chain-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .chain-link {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    color: #5a5248;
+    cursor: pointer;
+    padding: 2px 0;
+    border: none;
+    border-bottom: 1px solid transparent;
+    background: none;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .chain-link:hover { color: #f0ece3; }
+  .chain-link.active { color: #e8a07a; border-bottom-color: #e8a07a; }
+  .chain-sep { color: #2a2620; font-size: 14px; }
+  .chain-detail-box {
+    font-size: 13.5px;
+    font-weight: 300;
+    color: #6a6258;
+    line-height: 1.7;
+    min-height: 54px;
+    border-top: 1px solid #1e1c18;
+    padding-top: 22px;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Deliverables */
+  .deliverables { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .deliv-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 24px; transition: border-color 0.15s; }
+  .deliv-card:hover { border-color: #c8bfb4; }
+  .deliv-num { font-size: 10px; letter-spacing: 0.1em; color: #d0c8bc; font-weight: 500; margin-bottom: 10px; }
+  .deliv-title { font-family: 'Playfair Display', Georgia, serif; font-size: 16px; font-weight: 400; color: #0e0c0a; margin-bottom: 8px; }
+  .deliv-desc { font-size: 13px; font-weight: 300; color: #8a8278; line-height: 1.6; }
+
+  /* About */
+  .about-block p { font-size: 15px; font-weight: 300; color: #5a5248; line-height: 1.75; margin-bottom: 14px; max-width: 520px; }
+
+  /* CTA block */
+  .cta-block { background: #0e0c0a; border-radius: 8px; padding: 48px 44px; margin-top: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .cta-label-small { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #4a4540; font-weight: 500; margin-bottom: 10px; }
+  .cta-heading { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 400; color: #f0ece3; letter-spacing: -0.01em; line-height: 1.3; }
+  .offer-cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: #f0ece3;
+    border: 1px solid #3a3530;
+    padding: 14px 28px; font-size: 13px; font-weight: 400; font-family: inherit;
+    letter-spacing: 0.06em; text-transform: uppercase; border-radius: 3px;
+    cursor: pointer; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .offer-cta-btn:hover { border-color: #e8a07a; color: #e8a07a; }
+  .offer-cta-btn .arrow { display: inline-block; transition: transform 0.2s; }
+  .offer-cta-btn:hover .arrow { transform: translateX(4px); }
+
+  @media (max-width: 600px) {
+    .offer-nav { padding: 14px 20px; }
+    .offer-wrap { padding: 44px 20px 0; }
+    .chain-display { padding: 26px 22px; }
+    .deliverables { grid-template-columns: 1fr; }
+    .cta-block { flex-direction: column; align-items: flex-start; padding: 34px 28px; }
+    .headline-line1, .headline-line2 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: LANDING -->
+<div id="landing">
+
+  <a href="mailto:j4kepilgrim@gmail.com" class="nav-contact">Get in touch</a>
+
+  <div class="landing-cluster">
+
+    <div class="brand-lockup">
+      <div class="brand-name">AI Adoption Co</div>
+      <div class="brand-tagline">We help your team actually use AI.</div>
+    </div>
+
+    <div class="search-area">
+      <div class="input-rail" onclick="goToOffer()">
+      <button class="rail-icon-btn" type="button" aria-label="Add" onclick="goToOffer()">+</button>
+      <div class="rail-body">
+        <span id="typed-prompt"></span><span class="p-cursor"></span>
+      </div>
+      <button class="rail-icon-btn" type="button" aria-label="Voice" onclick="goToOffer()">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+          <path d="M12 14a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v4a3 3 0 0 0 3 3zm5-3a1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V20h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-2.08A7 7 0 0 1 5 11a1 1 0 1 1 2 0 5 5 0 0 0 10 0z" fill="currentColor"/>
+        </svg>
+      </button>
+      <button class="submit-btn" type="button" onclick="goToOffer()" aria-label="See the engagement">
+        <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="8" y1="13" x2="8" y2="3"/>
+          <polyline points="4,7 8,3 12,7"/>
+        </svg>
+      </button>
+    </div>
+      </div>
+
+  </div>
+
+</div>
+
+<!-- SCREEN 2: OFFER -->
+<div id="offer">
+
+  <nav class="offer-nav">
+    <button class="back-btn" onclick="goToLanding()">← Back</button>
+    <span class="nav-wordmark-offer">AI Adoption Co</span>
+  </nav>
+
+  <div class="offer-wrap">
+
+    <div class="offer-eyebrow">The Engagement</div>
+    <h1 class="offer-title">License → Outcome</h1>
+    <p class="offer-intro">You bought the licences. Your team has logins. Not much else is happening. This is a three-week engagement to change that — permanently, without depending on us.</p>
+
+    <div class="offer-meta">
+      <div>
+        <div class="m-label">Duration</div>
+        <div class="m-val">3 weeks</div>
+      </div>
+      <div>
+        <div class="m-label">Format</div>
+        <div class="m-val">Diagnostic + half-day workshop</div>
+      </div>
+      <div>
+        <div class="m-label">Company size</div>
+        <div class="m-val">10–100 people</div>
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="section-label">How it works</div>
+      <div class="phases">
+
+        <div class="phase-card" id="phase-1" onclick="togglePhase('phase-1')">
+          <div class="phase-header">
+            <div>
+              <div class="phase-week">Week 1</div>
+              <div class="phase-name">Diagnose</div>
+            </div>
+            <div class="phase-toggle">+</div>
+          </div>
+          <div class="phase-detail">
+            <p>Two parallel tracks run simultaneously across week one.</p>
+            <ul>
+              <li><strong>Sentiment survey</strong> — whole org, 10 min, self-serve. Captures comfort, actual usage, what's working, what's feared.</li>
+              <li><strong>Process interviews</strong> — 6–10 people, 30 min each, across functions. Finds where time actually goes and which workflows are ready.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card" id="phase-2" onclick="togglePhase('phase-2')">
+          <div class="phase-header">
+            <div>
+              <div class="phase-week">Week 2</div>
+              <div class="phase-name">Synthesise</div>
+            </div>
+            <div class="phase-toggle">+</div>
+          </div>
+          <div class="phase-detail">
+            <p>Raw data becomes two artefacts you can act on immediately.</p>
+            <ul>
+              <li><strong>Literacy heatmap</strong> — your org by team and seniority, showing who's where on the adoption curve.</li>
+              <li><strong>Ranked use-case backlog</strong> — 8–12 workflows scored on frequency, repeatability, judgment required, and stickiness. Top 1–2 become workshop targets.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card" id="phase-3" onclick="togglePhase('phase-3')">
+          <div class="phase-header">
+            <div>
+              <div class="phase-week">Week 3</div>
+              <div class="phase-name">Workshop</div>
+            </div>
+            <div class="phase-toggle">+</div>
+          </div>
+          <div class="phase-detail">
+            <p>Half-day, on-site or remote. Five parts built around the chain:</p>
+            <ul>
+              <li><strong>Foundation (20 min)</strong> — mental model, mirror the survey data, introduce the chain.</li>
+              <li><strong>Walk the chain (30 min)</strong> — one worked example, whole room, live.</li>
+              <li><strong>Spot & pick (20 min)</strong> — argue the backlog, form breakout groups around workflows that matter to them.</li>
+              <li><strong>Build in groups (60 min)</strong> — 2–3 people per workflow. Fill in the chain. We rotate and coach.</li>
+              <li><strong>Share-back + hand-off (50 min)</strong> — each group demos, patterns surfaced, owners named, 30-day check-ins set.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="section-label">The method</div>
+      <div class="chain-display">
+        <div class="chain-eyebrow">The chain — click each link</div>
+        <div class="chain-links">
+          <button class="chain-link" onclick="showChain(this,'model')">Model</button>
+          <span class="chain-sep">→</span>
+          <button class="chain-link" onclick="showChain(this,'context')">Context</button>
+          <span class="chain-sep">→</span>
+          <button class="chain-link" onclick="showChain(this,'reasoning')">Reasoning</button>
+          <span class="chain-sep">→</span>
+          <button class="chain-link" onclick="showChain(this,'tool')">Tool</button>
+          <span class="chain-sep">→</span>
+          <button class="chain-link" onclick="showChain(this,'handoff')">Hand-off</button>
+        </div>
+        <div class="chain-detail-box" id="chain-detail">
+          Every workflow your team runs through AI gets mapped across these five links. The chain becomes the worksheet, the SOP, and the capability that compounds after we're gone.
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="section-label">What you leave with</div>
+      <div class="deliverables">
+        <div class="deliv-card">
+          <div class="deliv-num">01</div>
+          <div class="deliv-title">Literacy baseline</div>
+          <div class="deliv-desc">Survey results, scored. Re-run at 90 days to prove the spend made a difference.</div>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-num">02</div>
+          <div class="deliv-title">Ranked backlog</div>
+          <div class="deliv-desc">8–12 use cases scored on impact, effort, and stickiness. The roadmap for what to tackle next.</div>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-num">03</div>
+          <div class="deliv-title">2–3 live workflows</div>
+          <div class="deliv-desc">Built, documented, embedded where work happens. Named owners and 30-day review dates.</div>
+        </div>
+        <div class="deliv-card">
+          <div class="deliv-num">04</div>
+          <div class="deliv-title">The chain</div>
+          <div class="deliv-desc">The framework to spot, build, and own every workflow that comes after. No reliance on us.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="section-label">Who we are</div>
+      <div class="about-block">
+        <p>AI Adoption Co is a specialist practice focused on one problem: companies that have bought AI access but haven't turned it into operational reality.</p>
+        <p>We don't build AI products. We don't run training courses. We build the capability to design, own, and iterate on AI workflows directly inside your team — then we leave.</p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div>
+        <div class="cta-label-small">Ready to start?</div>
+        <div class="cta-heading">Let's talk about<br>your team.</div>
+      </div>
+      <a href="mailto:j4kepilgrim@gmail.com" class="offer-cta-btn">
+        Get in touch <span class="arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ── TYPEWRITER ── */
+  function typewriter(el, texts, { typeMs = 65, deleteMs = 35, pauseMs = 2200, pauseEmptyMs = 400 } = {}) {
+    let idx = 0, pos = 0, deleting = false;
+    function tick() {
+      const full = texts[idx];
+      if (!deleting) {
+        pos++;
+        el.textContent = full.slice(0, pos);
+        if (pos === full.length) {
+          deleting = true;
+          setTimeout(tick, pauseMs);
+          return;
+        }
+        setTimeout(tick, typeMs);
+      } else {
+        pos--;
+        el.textContent = full.slice(0, pos);
+        if (pos === 0) {
+          deleting = false;
+          idx = (idx + 1) % texts.length;
+          setTimeout(tick, pauseEmptyMs);
+          return;
+        }
+        setTimeout(tick, deleteMs);
+      }
+    }
+    tick();
+  }
+
+  const searchPrompts = [
+    "How can I build this presentation faster?",
+    "Can you summarise these client notes?",
+    "Write a follow-up email for this deal.",
+    "Turn this meeting into action items.",
+    "Research this company for me.",
+    "Help me respond to this difficult email.",
+    "Build a proposal from these notes.",
+    "What should I prioritise this week?",
+    "Draft a job description for this role.",
+    "Rewrite this pitch in plain English.",
+  ];
+
+  typewriter(document.getElementById('typed-prompt'), searchPrompts, { typeMs: 52, deleteMs: 22, pauseMs: 1900, pauseEmptyMs: 300 });
+
+  /* ── SCREEN TRANSITIONS ── */
+  function goToOffer() {
+    const landing = document.getElementById('landing');
+    const offer   = document.getElementById('offer');
+    landing.style.transition = 'opacity 0.3s ease';
+    landing.style.opacity = '0';
+    setTimeout(() => {
+      landing.style.display = 'none';
+      offer.style.opacity   = '0';
+      offer.style.display   = 'block';
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        offer.style.transition = 'opacity 0.45s ease';
+        offer.style.opacity    = '1';
+      });
+    }, 300);
+  }
+
+  function goToLanding() {
+    const landing = document.getElementById('landing');
+    const offer   = document.getElementById('offer');
+    offer.style.transition = 'opacity 0.3s ease';
+    offer.style.opacity    = '0';
+    setTimeout(() => {
+      offer.style.display   = 'none';
+      offer.style.transition = '';
+      landing.style.opacity = '0';
+      landing.style.display = 'flex';
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        landing.style.transition = 'opacity 0.4s ease';
+        landing.style.opacity    = '1';
+      });
+    }, 300);
+  }
+
+  /* ── PHASE ACCORDION ── */
+  function togglePhase(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.phase-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  /* ── CHAIN ── */
+  const chainData = {
+    model:     "Which AI tool, and why. Usually fixed by what's already licensed — but naming it explicitly anchors everything that follows.",
+    context:   "What does the model need to know? Documents, examples, past outputs, instructions. The single biggest lever on output quality — and the most consistently overlooked.",
+    reasoning: "How should it think through the problem? Step-by-step? Draft then critique? Plan first, then act? Defining this turns vague outputs into reliable ones.",
+    tool:      "Is this a one-shot prompt, a persistent project workspace, or an artefact — a document, a table, a structured output? The wrapper shapes the workflow.",
+    handoff:   "Where does the output live? Who owns it? How does it reach the people who need it? This is the link most teams skip — and why most AI experiments quietly die."
+  };
+
+  function showChain(btn, key) {
+    document.querySelectorAll('.chain-link').forEach(l => l.classList.remove('active'));
+    btn.classList.add('active');
+    const box = document.getElementById('chain-detail');
+    box.style.opacity = '0';
+    setTimeout(() => {
+      box.textContent   = chainData[key];
+      box.style.opacity = '1';
+    }, 150);
+  }
+</script>
+
+</body>
+</html>
