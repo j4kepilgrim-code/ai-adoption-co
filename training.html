@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Basic Training — AI Adoption Co</title>
+<title>AI Basic Training — AI Adoption Co</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -14,6 +14,22 @@
   max-width: 540px;
   margin: 0 auto;
   padding: 56px 40px 48px;
+}
+.t-header .display-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.t-format {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9a9080;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 10px;
 }
 
 /* ── TIMELINE ── */
@@ -156,12 +172,13 @@
   padding: 8px 40px 100px;
 }
 .t-cta a {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #0e0c0a;
   text-decoration: none;
-  letter-spacing: -0.01em;
   transition: color 0.15s;
 }
 .t-cta a:hover { color: #3b82f6; }
@@ -179,30 +196,16 @@
 
 <div class="t-header">
   <div class="breadcrumb">
-    <a href="offers.html">Our Offers</a>
-    <span>→</span>
-    <span>Basic Training</span>
+    <a href="offers.html">← Our Offers</a>
   </div>
-  <span class="eyebrow">Offer 01</span>
-  <h1 class="display-heading">Basic Training</h1>
+  <span class="eyebrow">01</span>
+  <h1 class="display-heading">AI Basic Training</h1>
+  <span class="t-format">Half-day in person</span>
 </div>
 
 <div class="timeline-wrap">
 
-  <!-- Stage 1 — In person -->
-  <div class="ts-card">
-    <div class="ts-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-        <circle cx="12" cy="9" r="2.5"/>
-      </svg>
-    </div>
-    <p class="ts-text">In person, on-site.</p>
-  </div>
-
-  <div class="ts-connector"></div>
-
-  <!-- Stage 2 — Concept intro -->
+  <!-- Stage 1 — Concept intro -->
   <div class="ts-card">
     <div class="ts-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -281,7 +284,7 @@
 </div>
 
 <div class="t-cta">
-  <a href="mailto:j4kepilgrim@gmail.com">Ready to run one? Get in touch →</a>
+  <a href="mailto:j4kepilgrim@gmail.com">Run this with your team →</a>
 </div>
 
 <footer class="site-footer">
