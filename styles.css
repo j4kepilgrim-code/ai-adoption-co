@@ -4,7 +4,12 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(226,232,240,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(226,232,240,0.5) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-attachment: fixed;
   color: #0f0e0c;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -68,18 +73,7 @@ body {
   padding: 80px 40px 72px;
   border-bottom: 1px solid #e2e8f0;
   overflow: hidden;
-  background: #ffffff;
 }
-.page-hero::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(#e2e8f0 1px, transparent 1px),
-    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.38;
-}
-.page-hero > * { position: relative; z-index: 1; }
 .hero-inner {
   max-width: 820px;
   margin: 0 auto;
@@ -90,7 +84,7 @@ body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #b0a898;
+  color: #3b82f6;
   font-weight: 500;
   margin-bottom: 14px;
   display: block;
@@ -124,7 +118,7 @@ body {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #c0b8ae;
+  color: #3b82f6;
   font-weight: 500;
   margin-bottom: 22px;
   display: block;
@@ -151,7 +145,7 @@ body {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #c0b8ae;
+  color: #3b82f6;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -316,6 +310,68 @@ body {
 }
 .footer-contact:hover { color: #0f0e0c; }
 
+/* ── SPEC LIST (training, assessment, build) ── */
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #eeebe6;
+}
+.spec-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid #eeebe6;
+  align-items: baseline;
+}
+.spec-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0e0c0a;
+  letter-spacing: -0.01em;
+}
+.spec-desc {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: #5a5248;
+  line-height: 1.65;
+}
+
+/* ── DARK HERO VARIANT ── */
+.page-hero--dark {
+  background: #0e0c0a;
+  border-bottom-color: #1e1c18;
+}
+.page-hero--dark::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}
+.page-hero--dark .breadcrumb,
+.page-hero--dark .breadcrumb span { color: #3a3530; }
+.page-hero--dark .breadcrumb a { color: #4a4540; }
+.page-hero--dark .breadcrumb a:hover { color: #f0ece3; }
+.page-hero--dark .eyebrow { color: #e8a07a; }
+.page-hero--dark .display-heading { color: #f0ece3; }
+.page-hero--dark .intro-text { color: #8a8278; }
+
+/* ── OFFER DETAIL BODY ── */
+.offer-body {
+  max-width: 600px;
+  margin-bottom: 80px;
+}
+.offer-body .body-text { margin-bottom: 32px; }
+.offer-who {
+  font-size: 15px;
+  font-weight: 300;
+  color: #8a8278;
+  font-style: italic;
+  line-height: 1.75;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #eeebe6;
+}
+
 /* ── OFFER DETAIL PAGES ── */
 .diff-block {
   border-left: 2px solid #e8a07a;
@@ -348,6 +404,9 @@ body {
 .breadcrumb a:hover { color: #0f0e0c; }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .spec-item { grid-template-columns: 1fr; gap: 5px; }
+}
 @media (max-width: 768px) {
   .page-hero { padding: 52px 20px 48px; }
   .page-wrap { padding: 48px 20px 80px; }
