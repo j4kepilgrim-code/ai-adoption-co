@@ -227,12 +227,14 @@
   position: relative;
 }
 .panel-bullets li::before {
-  content: '·';
+  content: '';
   position: absolute;
-  left: 0;
-  color: #c0b8ae;
-  font-size: 16px;
-  line-height: 1.2;
+  left: 1px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  background: #3b82f6;
+  border-radius: 50%;
 }
 
 /* ── OFFER PILL ── */
@@ -345,9 +347,9 @@ const levels = {
     offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Where most teams are after six months of paying for an enterprise plan.",
     bullets: [
-      "Opens the tool, gets something underwhelming, closes the tab",
-      'Has no picture of what “good” looks like',
-      "Suspects AI is useful — for other people, or other tasks"
+      "Has access to the tool but doesn't use it as part of how they work",
+      "Can't get useful output reliably",
+      "Doesn't know what the tool is actually capable of"
     ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
@@ -360,9 +362,9 @@ const levels = {
     offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Getting useful outputs regularly and starting to understand why.",
     bullets: [
-      "Treats the first response as a draft, not a verdict",
-      "Pushes back, refines, asks follow-ups",
-      "Has tasks where AI has genuinely replaced the old way"
+      "Writes clear prompts that include who they are, what they want, and the context behind it",
+      "Iterates on bad outputs instead of giving up",
+      "Uses AI for first drafts, summaries, and brainstorming on real work"
     ],
     icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
       <line x1="6" y1="24" x2="42" y2="24"/>
@@ -376,9 +378,9 @@ const levels = {
     offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Using AI in a way that's repeatable, not just occasional.",
     bullets: [
-      "Prompt instructions are saved, not retyped every session",
-      "Outputs are consistent enough that colleagues ask to use them too",
-      "Knows which tasks AI is worth using for — and which it isn't"
+      "Sets up workspaces with saved instructions, examples, and reference documents",
+      "Brings the right context every time: files, examples, constraints",
+      "Produces consistent results on the same task without rewriting the prompt each time"
     ],
     icon: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
       <rect x="6" y="32" width="36" height="6" rx="1.5" fill="currentColor"/>
@@ -393,9 +395,9 @@ const levels = {
     offer: { href: 'advanced-training.html', label: 'AI Advanced Training →' },
     hook: "Starting to think about where AI fits in the broader stack, not just what it can produce on its own.",
     bullets: [
-      "Pipes outputs somewhere useful — a CRM, a doc, a shared workflow",
-      "Combines AI with other tools rather than using it in isolation",
-      'Asks “what triggers this?” and “where does it go?” before building'
+      "Connects AI to other tools like CRMs, document libraries, or search",
+      "Builds custom skills that handle repeatable work end-to-end",
+      "Thinks about what goes in and what comes out, not just the prompt in the middle"
     ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="8" cy="24" r="5" fill="currentColor"/>
@@ -412,9 +414,9 @@ const levels = {
     offer: { href: 'advanced-training.html', label: 'AI Advanced Training →' },
     hook: "Building AI workflows that other people can run, not just use themselves.",
     bullets: [
-      "Designs for hand-off: clear inputs, owners, quality checks",
-      "Turns a one-off prompt into a process the team can follow",
-      "The work continues after they leave the room"
+      "Maps the full process: what starts it, what data it needs, who checks it, where it goes",
+      "Defines ownership, quality checks, and what failure looks like",
+      "Builds workflows the team can use without the person who built them"
     ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
@@ -430,9 +432,9 @@ const levels = {
     offer: { href: 'advanced-training.html', label: 'AI Advanced Training →' },
     hook: "Actively making the people around them better at this, not just getting better themselves.",
     bullets: [
-      "Coaches peers, spots what's degrading, raises the floor",
-      "Sees where AI should go next before leadership asks",
-      "The rarest level, and the one that makes everything else stick"
+      "Coaches peers through their own AI work without taking over",
+      "Reviews existing workflows to catch quality decline before it spreads",
+      "Spots when new AI capabilities matter for the business and when they don't"
     ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="24" cy="24" r="5" fill="currentColor"/>
@@ -502,7 +504,7 @@ function selectLevel(num) {
   <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
   <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
   <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
-    <a href="index.html" class="site-nav-link">Home</a>
+    <a href="index.html" class="site-nav-brand">Capable <span class="site-nav-brand-accent">AI</span></a>
     <div class="site-nav-group">
       <a href="levels.html" class="site-nav-link">AI Levels</a>
     </div>
@@ -515,10 +517,12 @@ function selectLevel(num) {
       </div>
     </div>
     <div class="site-nav-group">
-      <a href="about.html" class="site-nav-link">About</a>
-    </div>
-    <div class="site-nav-group">
-      <a href="contact.html" class="site-nav-link">Contact</a>
+      <span class="site-nav-label">Company</span>
+      <div class="site-nav-sub">
+        <a href="about.html" class="site-nav-sublink">About</a>
+        <a href="contact.html" class="site-nav-sublink">Contact</a>
+        <a href="privacy.html" class="site-nav-sublink">Privacy</a>
+      </div>
     </div>
   </div>
 </div>

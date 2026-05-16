@@ -7,86 +7,125 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+
+.t-header {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+}
+.t-header .display-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 0;
+}
+.t-date {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9a9080;
+  margin-top: 10px;
+  display: block;
+}
+
+.privacy-body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.privacy-section { display: flex; flex-direction: column; gap: 12px; }
+.privacy-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3b82f6;
+  display: block;
+  padding-top: 48px;
+  border-top: 1px solid #e2e8f0;
+}
+.privacy-body .body-text { font-size: 14px; line-height: 1.8; }
+.privacy-body .body-text + .body-text { margin-top: 10px; }
+.privacy-body a { color: #2563eb; text-decoration: none; }
+.privacy-body a:hover { text-decoration: underline; }
+.privacy-body strong { font-weight: 600; color: #0f0e0c; }
+
+@media (max-width: 600px) {
+  .t-header { padding: 48px 20px 36px; }
+  .privacy-body { padding: 0 20px 80px; }
+}
+
+</style>
 </head>
 <body>
 
-<header class="page-hero">
-  <div class="hero-inner">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span>→</span>
-      <span>Privacy Policy</span>
-    </div>
-    <span class="eyebrow">Legal</span>
-    <h1 class="display-heading">Privacy Policy</h1>
-    <p class="intro-text">How Capable AI handles your information.</p>
-    <div class="meta-bar">
-      <div class="meta-item">
-        <div class="m-label">Last updated</div>
-        <div class="m-val">16 May 2026</div>
-      </div>
-    </div>
-  </div>
-</header>
+<div class="t-header">
+  <span class="eyebrow">Legal</span>
+  <h1 class="display-heading">Privacy Policy</h1>
+  <span class="t-date">Last updated: 17 April 2026</span>
+</div>
 
-<div class="page-wrap">
+<div class="privacy-body">
 
-  <div class="page-section">
+  <div class="privacy-section">
     <p class="body-text">Capable AI ("we", "us", "our") takes your privacy seriously. This policy explains what information we collect, how we use it, how long we keep it, and your rights.</p>
     <p class="body-text">We comply with the Australian Privacy Act 1988 and the Australian Privacy Principles (APPs).</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">What We Collect</h2>
+  <div class="privacy-section">
+    <span class="privacy-label">What we collect</span>
     <p class="body-text"><strong>Through the website</strong></p>
-    <p class="body-text">When you contact us through our website, we collect your name, your email address, and any message or details you choose to share.</p>
-    <p class="body-text">We also use Google Analytics to understand how visitors use our site. This collects anonymised information such as pages visited, time on site, approximate location based on IP address, and device type. You can opt out of Google Analytics tracking using the Google Analytics opt-out browser add-on.</p>
+    <p class="body-text">When you contact us, we collect your name, email address, and any details you choose to share.</p>
+    <p class="body-text">We use Google Analytics to understand how visitors use our site. This collects anonymised data such as pages visited, time on site, approximate location, and device type. You can opt out using the Google Analytics opt-out browser add-on.</p>
     <p class="body-text"><strong>Through Assessment engagements</strong></p>
-    <p class="body-text">When we run an AI Opportunity Assessment for a client organisation, we collect survey responses from employees, interview notes from conversations with heads of department, and any documents the client chooses to share with us.</p>
-    <p class="body-text">This information is collected only with the explicit agreement of the client organisation, and we are clear with employees about how the data will be used before they participate.</p>
+    <p class="body-text">When we run an AI Opportunity Assessment, we collect survey responses from employees, interview notes, and any documents the client shares with us. This is collected only with explicit client agreement, and participants are told how their data will be used before they take part.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">How We Use It</h2>
-    <p class="body-text">Information collected through the website is used to respond to enquiries, send information you've requested, and improve our website and services.</p>
-    <p class="body-text">Information collected during Assessment engagements is used only to produce the diagnostic findings and presentation for that client. It is not used for any other purpose, shared with third parties, or aggregated with data from other clients.</p>
+  <div class="privacy-section">
+    <span class="privacy-label">How we use it</span>
+    <p class="body-text">Website enquiry data is used to respond to you and improve our services.</p>
+    <p class="body-text">Assessment engagement data is used only to produce findings for that client. It is not shared with third parties or aggregated with data from other clients.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">How Long We Keep It</h2>
-    <p class="body-text">Contact information from website enquiries is kept for as long as needed to respond to your enquiry. If we begin a working relationship, we keep your details for the duration of that engagement plus 24 months.</p>
-    <p class="body-text">Assessment engagement data, including surveys, interviews, and notes, is kept for 12 months after the engagement ends, after which it is deleted. If you would like your data deleted sooner, you can contact us at any time.</p>
-    <p class="body-text">Anonymised analytics data is kept for 14 months by Google Analytics, after which it is automatically deleted.</p>
+  <div class="privacy-section">
+    <span class="privacy-label">How long we keep it</span>
+    <p class="body-text">Contact enquiry data is kept for as long as needed to respond. If a working relationship begins, we keep your details for the engagement plus 24 months.</p>
+    <p class="body-text">Assessment data is kept for 12 months after the engagement ends, then deleted. You can request earlier deletion at any time.</p>
+    <p class="body-text">Anonymised analytics data is kept for 14 months by Google Analytics, then automatically deleted.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">Who We Share It With</h2>
+  <div class="privacy-section">
+    <span class="privacy-label">Who we share it with</span>
     <p class="body-text">We do not sell your information.</p>
-    <p class="body-text">We do not share your information with third parties, except where required to deliver our services. Email correspondence is handled through standard email providers such as Google. Website analytics are provided by Google Analytics. We may use AI tools such as Claude and ChatGPT to assist with our own work, but we do not put identifiable client data into consumer-tier AI plans.</p>
-    <p class="body-text">If we ever need to share your data with a third party for a specific reason, for example if you ask us to, we will tell you first.</p>
+    <p class="body-text">We do not share your data with third parties except where required to deliver our services — for example email providers (Google) and analytics (Google Analytics). We may use AI tools such as Claude and ChatGPT in our own work, but we do not put identifiable client data into consumer-tier AI plans.</p>
+    <p class="body-text">If we ever need to share your data with a specific third party, we will tell you first.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">Your Rights</h2>
-    <p class="body-text">Under the Australian Privacy Act, you have the right to ask what information we hold about you, ask us to correct information that is wrong or out of date, ask us to delete your information, and make a complaint about how we have handled your information.</p>
-    <p class="body-text">To exercise any of these rights, email us at <a href="mailto:hello@capableai.io" style="color:#0e0c0a;text-decoration:none;font-weight:500;">hello@capableai.io</a>.</p>
-    <p class="body-text">If you are not satisfied with how we have handled your complaint, you can contact the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" style="color:#0e0c0a;text-decoration:none;font-weight:500;">oaic.gov.au</a>.</p>
+  <div class="privacy-section">
+    <span class="privacy-label">Your rights</span>
+    <p class="body-text">Under the Australian Privacy Act, you have the right to ask what information we hold, ask us to correct or delete it, and make a complaint about how we have handled it.</p>
+    <p class="body-text">To exercise any of these rights, email us at <a href="mailto:hello@capableai.io">hello@capableai.io</a>.</p>
+    <p class="body-text">If you are not satisfied with our response, you can contact the Office of the Australian Information Commissioner at <a href="https://www.oaic.gov.au" target="_blank" rel="noopener">oaic.gov.au</a>.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">Data Security</h2>
-    <p class="body-text">We take reasonable steps to protect the information we hold. Data is stored on secure cloud services, accessed through password-protected accounts, and shared only with people who need it to do the work.</p>
-    <p class="body-text">We use AI tools that have business-grade data agreements in place. We do not use consumer-tier AI plans for any work that involves identifiable client information.</p>
+  <div class="privacy-section">
+    <span class="privacy-label">Data security</span>
+    <p class="body-text">Data is stored on secure cloud services, accessed through password-protected accounts, and shared only with people who need it to do the work. We use AI tools with business-grade data agreements and do not use consumer-tier AI plans for identifiable client information.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">Changes To This Policy</h2>
-    <p class="body-text">We may update this policy from time to time. The most recent version will always be on this page, with the date last updated at the top.</p>
+  <div class="privacy-section">
+    <span class="privacy-label">Changes to this policy</span>
+    <p class="body-text">We may update this policy from time to time. The most recent version will always be on this page with the date it was last updated.</p>
   </div>
 
-  <div class="page-section">
-    <h2 class="section-heading">Contact</h2>
-    <p class="body-text">Questions about privacy or this policy: <a href="mailto:hello@capableai.io" style="color:#0e0c0a;text-decoration:none;font-weight:500;">hello@capableai.io</a></p>
+  <div class="privacy-section">
+    <span class="privacy-label">Contact</span>
+    <p class="body-text">Questions about this policy: <a href="mailto:hello@capableai.io">hello@capableai.io</a></p>
     <p class="body-text">Capable AI is based in Sydney, Australia.</p>
   </div>
 
@@ -96,7 +135,7 @@
   <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
   <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
   <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
-    <a href="index.html" class="site-nav-link">Home</a>
+    <a href="index.html" class="site-nav-brand">Capable <span class="site-nav-brand-accent">AI</span></a>
     <div class="site-nav-group">
       <a href="levels.html" class="site-nav-link">AI Levels</a>
     </div>
@@ -109,10 +148,12 @@
       </div>
     </div>
     <div class="site-nav-group">
-      <a href="about.html" class="site-nav-link">About</a>
-    </div>
-    <div class="site-nav-group">
-      <a href="contact.html" class="site-nav-link">Contact</a>
+      <span class="site-nav-label">Company</span>
+      <div class="site-nav-sub">
+        <a href="about.html" class="site-nav-sublink">About</a>
+        <a href="contact.html" class="site-nav-sublink">Contact</a>
+        <a href="privacy.html" class="site-nav-sublink">Privacy</a>
+      </div>
     </div>
   </div>
 </div>

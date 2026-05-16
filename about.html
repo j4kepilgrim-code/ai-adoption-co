@@ -7,56 +7,132 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+
+.t-header {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 56px 40px 48px;
+}
+.t-header .display-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 0;
+}
+.brand-accent {
+  display: inline-block;
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 28%, #2563eb 62%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-sub {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  color: #5a5248;
+  line-height: 1.7;
+  margin-top: 16px;
+  max-width: 420px;
+  display: block;
+}
+
+.about-body {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+.about-section { display: flex; flex-direction: column; gap: 14px; }
+.about-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #3b82f6;
+  display: block;
+  padding-top: 44px;
+  border-top: 1px solid #e2e8f0;
+}
+.about-label--first {
+  padding-top: 0;
+  border-top: none;
+}
+.about-body .body-text {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.about-divider {
+  max-width: 540px;
+  margin: 48px auto 0;
+  padding: 0 40px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.t-cta {
+  text-align: left;
+  padding: 40px 40px 100px;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.t-cta a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0e0c0a;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.t-cta a:hover { color: #2563eb; }
+
+@media (max-width: 600px) {
+  .t-header { padding: 48px 20px 40px; }
+  .about-body { padding: 0 20px; }
+  .about-divider { padding: 0 20px; }
+  .t-cta { padding: 32px 20px 80px; }
+}
+
+</style>
 </head>
 <body>
 
-<header class="page-hero">
-  <div class="hero-inner">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span>→</span>
-      <span>About</span>
-    </div>
-    <span class="eyebrow">About</span>
-    <h1 class="display-heading">Capable AI</h1>
-    <p class="intro-text">Built on the belief that people deserve to be trained on the tools changing their world.</p>
-  </div>
-</header>
-
-<div class="page-wrap">
-
-  <div class="page-section">
-    <h2 class="section-heading">Mission</h2>
-    <p class="body-text">AI is changing how work gets done, and most teams haven't been given a real chance to keep up. Capable AI exists to close that gap. We demystify the tools, build real confidence, so people don't fall behind. They get ahead.</p>
-  </div>
-
-  <div class="page-section">
-    <span class="section-label">The people behind it</span>
-    <p class="body-text">Capable AI is based in Sydney, built on fifteen years across digital transformation and the last two years deep inside enterprise AI. We know what these tools can (and can't!) do, what makes them feel confusing, and what good looks like. That's what we teach.</p>
-  </div>
-
-  <div class="page-section">
-    <div class="best-for-box">
-      <a href="mailto:hello@capableai.io" class="body-text" style="text-decoration:none;color:#0e0c0a;">Want to talk? Get in touch →</a>
-    </div>
-  </div>
-
+<div class="t-header">
+  <span class="eyebrow">About</span>
+  <h1 class="display-heading">Capable <span class="brand-accent">AI</span></h1>
+  <span class="about-sub">Built on the belief that people deserve to be trained on the tools changing their world.</span>
 </div>
 
-<footer class="site-footer">
-  <span class="footer-logo">Capable <span class="footer-logo-accent">AI</span></span>
-  <span class="footer-tagline">We help your team actually use AI.</span>
-  <div class="footer-links">
-    <a href="contact.html" class="footer-contact">Contact us</a>
-    <a href="privacy.html" class="footer-utility">Privacy Policy</a>
+<div class="about-body">
+  <div class="about-section">
+    <span class="about-label about-label--first">Mission</span>
+    <p class="body-text">AI is changing how work gets done, and most teams haven't been given a real chance to keep up. Capable AI exists to close that gap. We demystify the tools and build real confidence, so the people doing the work get ahead of it instead of falling behind.</p>
   </div>
-</footer>
+  <div class="about-section">
+    <span class="about-label">The people behind it</span>
+    <p class="body-text">Capable AI is based in Sydney, built on fifteen years across digital transformation and the last two years deep inside enterprise AI. We know what these tools can (and can't!) do, what makes them feel confusing, and what good actually looks like in practice.</p>
+  </div>
+</div>
+
+<div class="about-divider"></div>
+
+<div class="t-cta">
+  <a href="contact.html">Get in touch →</a>
+</div>
 
 <div class="site-nav" id="site-nav">
   <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
   <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
   <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
-    <a href="index.html" class="site-nav-link">Home</a>
+    <a href="index.html" class="site-nav-brand">Capable <span class="site-nav-brand-accent">AI</span></a>
     <div class="site-nav-group">
       <a href="levels.html" class="site-nav-link">AI Levels</a>
     </div>
@@ -69,10 +145,12 @@
       </div>
     </div>
     <div class="site-nav-group">
-      <a href="about.html" class="site-nav-link">About</a>
-    </div>
-    <div class="site-nav-group">
-      <a href="contact.html" class="site-nav-link">Contact</a>
+      <span class="site-nav-label">Company</span>
+      <div class="site-nav-sub">
+        <a href="about.html" class="site-nav-sublink">About</a>
+        <a href="contact.html" class="site-nav-sublink">Contact</a>
+        <a href="privacy.html" class="site-nav-sublink">Privacy</a>
+      </div>
     </div>
   </div>
 </div>
