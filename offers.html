@@ -183,14 +183,6 @@
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="index.html" class="site-nav-logo">AI Adoption Co</a>
-  <div class="site-nav-links">
-    <a href="levels.html">The Levels</a>
-    <a href="offers.html" class="active">Our Offers</a>
-    <a href="mailto:j4kepilgrim@gmail.com" class="nav-pill">Get in touch</a>
-  </div>
-</nav>
 
 <header class="page-hero">
   <div class="hero-inner">
@@ -221,7 +213,7 @@
     <!-- Offer 2 -->
     <div class="offer-card">
       <div class="offer-card-num">02</div>
-      <div class="offer-card-name">AI Maturity &amp; Opportunity Assessment</div>
+      <div class="offer-card-name">AI Opportunity Assessment</div>
       <div class="offer-card-position">For organisations who need to know where they stand and where to focus.</div>
       <ul class="offer-card-bullets">
         <li>Whole-organisation survey plus 6–10 in-depth interviews</li>
@@ -322,5 +314,23 @@
   <a href="mailto:j4kepilgrim@gmail.com" class="footer-contact">j4kepilgrim@gmail.com</a>
 </footer>
 
+
+<div class="nav-dot" id="nav-dot">
+  <div class="nav-dot-menu" id="nav-menu">
+    <a href="index.html" class="nav-dot-item">Home</a>
+    <a href="levels.html" class="nav-dot-item">The Levels</a>
+    <a href="mailto:j4kepilgrim@gmail.com" class="nav-dot-item">Get in touch</a>
+  </div>
+  <button class="nav-dot-btn" onclick="toggleNavDot()" aria-label="Menu"></button>
+</div>
+<script>
+function toggleNavDot() {
+  document.getElementById('nav-menu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const dot = document.getElementById('nav-dot');
+  if (dot && !dot.contains(e.target)) document.getElementById('nav-menu').classList.remove('open');
+});
+</script>
 </body>
 </html>

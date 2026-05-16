@@ -39,7 +39,7 @@ body {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #c8c0b8;
+  color: #5a5248;
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -117,7 +117,7 @@ body {
 }
 .panel-idle-arrow {
   font-size: 20px;
-  color: #e2e0dc;
+  color: #9a9080;
   transform: rotate(180deg);
   display: inline-block;
 }
@@ -126,7 +126,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #d8d4ce;
+  color: #9a9080;
 }
 .panel-idle.hidden { opacity: 0; pointer-events: none; }
 
@@ -210,6 +210,67 @@ body {
 .lf-arrow { display: inline-block; transition: transform 0.2s; }
 .levels-footer-link a:hover .lf-arrow { transform: translateX(4px); }
 
+/* ── PANEL COPY ── */
+.panel-hook {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0f0e0c;
+  line-height: 1.55;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.panel-bullets {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.panel-bullets li {
+  font-size: 12px;
+  font-weight: 300;
+  color: #5a5248;
+  line-height: 1.6;
+  padding-left: 14px;
+  position: relative;
+}
+.panel-bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: #c0b8ae;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* ── OFFER PILL ── */
+.panel-offer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e8edf2;
+  display: flex;
+  justify-content: center;
+}
+.panel-offer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #3b82f6;
+  color: #3b82f6;
+  background: transparent;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 8px 20px;
+  border-radius: 999px;
+  transition: background 0.18s, color 0.18s;
+}
+.panel-offer-pill:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .levels-outer { grid-template-columns: 1fr; }
@@ -222,14 +283,6 @@ body {
 </head>
 <body>
 
-<nav class="site-nav">
-  <a href="index.html" class="site-nav-logo">AI Adoption Co</a>
-  <div class="site-nav-links">
-    <a href="levels.html" class="active">The Levels</a>
-    <a href="offers.html">Our Offers</a>
-    <a href="mailto:j4kepilgrim@gmail.com" class="nav-pill">Get in touch</a>
-  </div>
-</nav>
 
 <div class="levels-outer">
 
@@ -259,7 +312,7 @@ body {
     </div>
     <div class="level-block" data-level="5" onclick="selectLevel(5)">
       <div class="lb-num">5</div>
-      <div class="lb-name">Champion</div>
+      <div class="lb-name">Orchestrator</div>
     </div>
   </div>
 
@@ -277,6 +330,9 @@ body {
         <div class="panel-level-label" id="panel-label"></div>
         <div class="panel-name" id="panel-name"></div>
         <div class="panel-detail" id="panel-detail"></div>
+        <div class="panel-offer">
+          <a id="panel-offer-link" class="panel-offer-pill" href="#"></a>
+        </div>
       </div>
     </div>
 
@@ -300,7 +356,13 @@ const levels = {
     name: 'Passenger',
     label: 'Level 0',
     lc: '#93c5fd',
-    detail: 'Where most teams are after six months of paying for an enterprise plan. The tool is there, the licence paid for — but nobody\'s done more than draft an email and close the tab. The problem isn\'t willingness. Nobody\'s been shown what genuinely useful output looks like.',
+    offer: { href: 'training.html', label: 'Training Programme →' },
+    hook: "Where most teams are after six months of paying for an enterprise plan.",
+    bullets: [
+      "Opens the tool, gets something underwhelming, closes the tab",
+      'Has no picture of what “good” looks like',
+      "Suspects AI is useful — for other people, or other tasks"
+    ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/>
     </svg>`
@@ -309,7 +371,13 @@ const levels = {
     name: 'Driver',
     label: 'Level 1',
     lc: '#60a5fa',
-    detail: 'Gets useful outputs regularly. Understands that prompts are conversations, not commands — and that the first output is rarely the final one. Has stopped asking "why didn\'t it work?" and started asking "how do I tell it more clearly?" Getting every person here is the goal of Training Day.',
+    offer: { href: 'training.html', label: 'Training Programme →' },
+    hook: "Getting useful outputs regularly and starting to understand why.",
+    bullets: [
+      "Treats the first response as a draft, not a verdict",
+      "Pushes back, refines, asks follow-ups",
+      "Has tasks where AI has genuinely replaced the old way"
+    ],
     icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
       <line x1="6" y1="24" x2="42" y2="24"/>
       <polyline points="30,12 42,24 30,36"/>
@@ -319,7 +387,13 @@ const levels = {
     name: 'Builder',
     label: 'Level 2',
     lc: '#3b82f6',
-    detail: 'Moving from ad hoc to systematic. Persistent project workspaces, real documents, real instructions — producing the same output reliably every time. Where AI stops being a novelty and starts being infrastructure. The Training Programme gets most teams here within 30 days.',
+    offer: { href: 'training.html', label: 'Training Programme →' },
+    hook: "Using AI in a way that's repeatable, not just occasional.",
+    bullets: [
+      "Prompt instructions are saved, not retyped every session",
+      "Outputs are consistent enough that colleagues ask to use them too",
+      "Knows which tasks AI is worth using for — and which it isn't"
+    ],
     icon: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
       <rect x="6" y="32" width="36" height="6" rx="1.5" fill="currentColor"/>
       <rect x="6" y="22" width="28" height="6" rx="1.5" fill="currentColor" opacity="0.65"/>
@@ -330,7 +404,13 @@ const levels = {
     name: 'Connector',
     label: 'Level 3',
     lc: '#2563eb',
-    detail: 'Treats AI as infrastructure rather than a conversation. Connects it to tools, data sources, and outputs that go somewhere useful. Thinks about where AI fits in the stack, not just what it can produce on its own. Less common, but often the first to emerge after a Training Day.',
+    offer: { href: 'assessment.html', label: 'AI Opportunity Assessment →' },
+    hook: "Starting to think about where AI fits in the broader stack, not just what it can produce on its own.",
+    bullets: [
+      "Pipes outputs somewhere useful — a CRM, a doc, a shared workflow",
+      "Combines AI with other tools rather than using it in isolation",
+      'Asks “what triggers this?” and “where does it go?” before building'
+    ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="8" cy="24" r="5" fill="currentColor"/>
       <circle cx="40" cy="24" r="5" fill="currentColor"/>
@@ -343,7 +423,13 @@ const levels = {
     name: 'Architect',
     label: 'Level 4',
     lc: '#1d4ed8',
-    detail: 'Builds AI workflows for others to use, not just themselves. Thinks about inputs, outputs, owners, hand-offs, and quality from the start. Makes AI adoption institutional rather than individual — turns a good prompt into a company-wide process. The reason we can leave and the work continues.',
+    offer: { href: 'build.html', label: 'Build & Manage →' },
+    hook: "Building AI workflows that other people can run, not just use themselves.",
+    bullets: [
+      "Designs for hand-off: clear inputs, owners, quality checks",
+      "Turns a one-off prompt into a process the team can follow",
+      "The work continues after they leave the room"
+    ],
     icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
       <line x1="6" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
@@ -352,12 +438,28 @@ const levels = {
     </svg>`
   },
   5: {
-    name: 'Champion',
+    name: 'Orchestrator',
     label: 'Level 5',
     lc: '#1e3a8a',
-    detail: 'Doesn\'t just use AI well — makes the organisation better at it. Coaches peers, spots what\'s next, keeps quality from degrading as usage scales. One or two Level 5 people in a 30-person team can change how the whole organisation works. After every Training Day, we identify these people by name.',
-    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-      <path d="M24 6 l4.94 10.02 11.06 1.61 -8 7.8 1.89 11.01 L24 31.5 l-9.89 5.2 1.89-11.01 -8-7.8 11.06-1.61 Z"/>
+    offer: { href: 'build.html', label: 'Build & Manage →' },
+    hook: "Actively making the people around them better at this, not just getting better themselves.",
+    bullets: [
+      "Coaches peers, spots what's degrading, raises the floor",
+      "Sees where AI should go next before leadership asks",
+      "The rarest level, and the one that makes everything else stick"
+    ],
+    icon: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="5" fill="currentColor"/>
+      <circle cx="24" cy="7" r="3" fill="currentColor" opacity="0.5"/>
+      <circle cx="39" cy="15.5" r="3" fill="currentColor" opacity="0.5"/>
+      <circle cx="39" cy="32.5" r="3" fill="currentColor" opacity="0.5"/>
+      <circle cx="24" cy="41" r="3" fill="currentColor" opacity="0.5"/>
+      <circle cx="9" cy="24" r="3" fill="currentColor" opacity="0.5"/>
+      <line x1="24" y1="19" x2="24" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="28.6" y1="21.4" x2="36.3" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="28.6" y1="26.6" x2="36.3" y2="31" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="24" y1="29" x2="24" y2="38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      <line x1="19" y1="24" x2="12" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
     </svg>`
   }
 };
@@ -389,7 +491,15 @@ function selectLevel(num) {
     label.style.setProperty('--panel-lc', data.lc);
     label.style.color = data.lc;
     name.textContent  = data.name;
-    detail.textContent = data.detail;
+    detail.innerHTML = `<p class="panel-hook">${data.hook}</p><ul class="panel-bullets">${data.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
+
+    const offerLink = document.getElementById('panel-offer-link');
+    offerLink.textContent = data.offer.label;
+    offerLink.href = data.offer.href;
+    offerLink.style.borderColor = data.lc;
+    offerLink.style.color = data.lc;
+    offerLink.onmouseenter = () => { offerLink.style.background = data.lc; offerLink.style.color = '#fff'; };
+    offerLink.onmouseleave = () => { offerLink.style.background = 'transparent'; offerLink.style.color = data.lc; };
 
     idle.classList.add('hidden');
     panel.classList.add('visible');
@@ -400,6 +510,24 @@ function selectLevel(num) {
     void panel.offsetWidth;
   }, 150);
 }
+</script>
+
+<div class="nav-dot" id="nav-dot">
+  <div class="nav-dot-menu" id="nav-menu">
+    <a href="index.html" class="nav-dot-item">Home</a>
+    <a href="offers.html" class="nav-dot-item">Our Offers</a>
+    <a href="mailto:j4kepilgrim@gmail.com" class="nav-dot-item">Get in touch</a>
+  </div>
+  <button class="nav-dot-btn" onclick="toggleNavDot()" aria-label="Menu"></button>
+</div>
+<script>
+function toggleNavDot() {
+  document.getElementById('nav-menu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const dot = document.getElementById('nav-dot');
+  if (dot && !dot.contains(e.target)) document.getElementById('nav-menu').classList.remove('open');
+});
 </script>
 </body>
 </html>
