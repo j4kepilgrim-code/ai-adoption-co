@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Advanced Training — AI Adoption Co</title>
+<title>AI Advanced Training — Capable AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -13,22 +13,23 @@
 .t-header {
   max-width: 540px;
   margin: 0 auto;
-  padding: 64px 40px 56px;
+  padding: 56px 40px 48px;
 }
-.audience-line {
-  font-size: 13px;
-  font-weight: 300;
-  font-style: italic;
-  color: #999;
+.t-header .display-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.t-format {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9a9080;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   display: block;
-  margin-bottom: 10px;
-}
-.t-sub {
-  font-size: 15px;
-  font-weight: 300;
-  color: #5a5248;
-  line-height: 1.7;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 /* ── TIMELINE ── */
@@ -79,6 +80,31 @@
   color: #5a5248;
   line-height: 1.65;
   max-width: 340px;
+}
+.ts-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 6px 6px 0 #ddd8d2;
+}
+.ts-card .ts-icon {
+  border: none;
+  background: transparent;
+  color: #9a9080;
+  flex-shrink: 0;
+}
+.ts-card .ts-text {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #0f0e0c;
+  max-width: none;
 }
 
 /* ── LEVEL PILLS ── */
@@ -146,12 +172,13 @@
   padding: 8px 40px 100px;
 }
 .t-cta a {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #0e0c0a;
   text-decoration: none;
-  letter-spacing: -0.01em;
   transition: color 0.15s;
 }
 .t-cta a:hover { color: #2563eb; }
@@ -169,47 +196,28 @@
 
 <div class="t-header">
   <div class="breadcrumb">
-    <a href="offers.html">Our Offers</a>
-    <span>→</span>
-    <span>Advanced Training</span>
+    <a href="offers.html">← Our Offers</a>
   </div>
-  <span class="eyebrow">Offer 02</span>
-  <span class="audience-line">For a smaller group — people already at Level 2 who are ready to go further.</span>
-  <h1 class="display-heading">Advanced Training</h1>
-  <p class="t-sub">A full-day session for the people on your team who are ready to build and lead.</p>
+  <span class="eyebrow">02</span>
+  <h1 class="display-heading">AI Advanced Training</h1>
+  <span class="t-format">Full day in person</span>
 </div>
 
 <div class="timeline-wrap">
 
-  <!-- Stage 1 — In person -->
-  <div class="ts-stage">
-    <div class="ts-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-        <circle cx="12" cy="9" r="2.5"/>
-      </svg>
-    </div>
-    <p class="ts-text">In person, on-site. Smaller group.</p>
-  </div>
-
-  <div class="ts-connector"></div>
-
-  <!-- Stage 2 — Concept intro -->
-  <div class="ts-stage">
+  <div class="ts-card">
     <div class="ts-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2l2 8 8 2-8 2-2 8-2-8-8-2 8-2 2-8z"/>
       </svg>
     </div>
-    <p class="ts-text">From using AI to designing systems others can run.</p>
+    <p class="ts-text">From personal productivity to building AI systems.</p>
   </div>
 
   <div class="ts-connector"></div>
 
-  <!-- Stage 3 — Level pills -->
   <div class="ts-pills">
 
-    <!-- Pill: 2 → 3 -->
     <div class="level-pill" style="--lc:#2563eb">
       <div class="pill-icon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -224,13 +232,12 @@
         <div class="pill-transition">2 → 3</div>
         <div class="pill-name">Builder to Connector</div>
         <div class="pill-topic">Connection</div>
-        <div class="pill-cycle">Explain · Demo · Exercise · Apply · Present</div>
+        <div class="pill-cycle">Explain · Exercise · Group · Share</div>
       </div>
     </div>
 
     <div class="ts-connector--short"></div>
 
-    <!-- Pill: 3 → 4 -->
     <div class="level-pill" style="--lc:#1d4ed8">
       <div class="pill-icon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -244,13 +251,12 @@
         <div class="pill-transition">3 → 4</div>
         <div class="pill-name">Connector to Architect</div>
         <div class="pill-topic">Design</div>
-        <div class="pill-cycle">Explain · Demo · Exercise · Apply · Present</div>
+        <div class="pill-cycle">Explain · Exercise · Group · Share</div>
       </div>
     </div>
 
     <div class="ts-connector--short"></div>
 
-    <!-- Pill: 4 → 5 -->
     <div class="level-pill" style="--lc:#1e3a8a">
       <div class="pill-icon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -271,7 +277,7 @@
         <div class="pill-transition">4 → 5</div>
         <div class="pill-name">Architect to Orchestrator</div>
         <div class="pill-topic">Coaching</div>
-        <div class="pill-cycle">Explain · Demo · Exercise · Apply · Present</div>
+        <div class="pill-cycle">Explain · Exercise · Group · Share</div>
       </div>
     </div>
 
@@ -279,20 +285,18 @@
 
   <div class="ts-connector"></div>
 
-  <!-- Stage 4 — Wrap up -->
-  <div class="ts-stage">
+  <div class="ts-card">
     <div class="ts-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="4 13 9 18 20 6"/>
       </svg>
     </div>
-    <p class="ts-text">Present back & close.</p>
+    <p class="ts-text">Wrap up and close.</p>
   </div>
 
   <div class="ts-connector"></div>
 
-  <!-- Stage 5 — Office hours -->
-  <div class="ts-stage">
+  <div class="ts-card">
     <div class="ts-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="9"/>
@@ -305,11 +309,11 @@
 </div>
 
 <div class="t-cta">
-  <a href="mailto:j4kepilgrim@gmail.com">Want to take your best people further? Get in touch →</a>
+  <a href="mailto:j4kepilgrim@gmail.com">Run the advanced session with your team →</a>
 </div>
 
 <footer class="site-footer">
-  <span class="footer-logo">AI Adoption Co</span>
+  <span class="footer-logo">Capable AI</span>
   <span class="footer-tagline">We help your team actually use AI.</span>
   <a href="mailto:j4kepilgrim@gmail.com" class="footer-contact">j4kepilgrim@gmail.com</a>
 </footer>

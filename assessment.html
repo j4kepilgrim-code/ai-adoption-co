@@ -3,52 +3,214 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Assessment — AI Adoption Co</title>
+<title>AI Opportunity Assessment — Capable AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+
+/* ── HEADER ── */
+.t-header {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 56px 40px 48px;
+}
+.t-header .display-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.t-format {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9a9080;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 10px;
+}
+
+/* ── TIMELINE ── */
+.timeline-wrap {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ts-connector {
+  width: 1px;
+  height: 56px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+.ts-connector--short {
+  width: 1px;
+  height: 28px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+.ts-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 6px 6px 0 #ddd8d2;
+}
+.ts-card--blue {
+  box-shadow: 6px 6px 0 #3b82f6;
+}
+.ts-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 1px solid #e8edf2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c0b8ae;
+  flex-shrink: 0;
+}
+.ts-card .ts-icon {
+  border: none;
+  background: transparent;
+  color: #9a9080;
+}
+.ts-card--blue .ts-icon {
+  color: #2563eb;
+}
+.ts-icon svg { width: 17px; height: 17px; }
+.ts-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5a5248;
+  line-height: 1.65;
+  max-width: 340px;
+}
+.ts-card .ts-text {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #0f0e0c;
+  max-width: none;
+}
+.ts-text span {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #9a9080;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ── CTA ── */
+.t-cta {
+  text-align: center;
+  padding: 8px 40px 100px;
+}
+.t-cta a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0e0c0a;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.t-cta a:hover { color: #2563eb; }
+
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  .t-header { padding: 48px 20px 44px; }
+  .timeline-wrap { padding: 0 20px 72px; }
+  .t-cta { padding: 8px 20px 80px; }
+}
+
+</style>
 </head>
 <body>
 
-<header class="page-hero page-hero--dark">
-  <div class="hero-inner">
-    <div class="breadcrumb">
-      <a href="offers.html">Our Offers</a>
-      <span>→</span>
-      <span>Assessment</span>
-    </div>
-    <span class="eyebrow">Offer 03</span>
-    <h1 class="display-heading">Assessment</h1>
-    <p class="intro-text">A clear read on where your organisation actually stands with AI.</p>
+<div class="t-header">
+  <div class="breadcrumb">
+    <a href="offers.html">← Our Offers</a>
   </div>
-</header>
+  <span class="eyebrow">03</span>
+  <h1 class="display-heading">AI Opportunity Assessment</h1>
+  <span class="t-format">Diagnostic engagement</span>
+</div>
 
-<div class="page-wrap">
+<div class="timeline-wrap">
 
-  <div class="offer-body">
-    <p class="body-text">A clear read on where your organisation actually stands with AI and where to focus next. Built from your data — a whole-org survey, interviews across functions, and a ranked backlog of the workflows worth changing. The output is a board-ready presentation with specific recommendations, not a generic strategy deck.</p>
-
-    <ul class="bullet-list">
-      <li>Covers the whole organisation, not just a sample</li>
-      <li>Findings mapped against the AI maturity levels</li>
-      <li>Every recommendation comes with a clear next step</li>
-    </ul>
-
-    <p class="offer-who">Leadership teams who need a credible map before committing to a strategy.</p>
+  <div class="ts-card">
+    <div class="ts-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="4.5" width="14" height="15" rx="2"/>
+        <line x1="9" y1="9" x2="15" y2="9"/>
+        <line x1="9" y1="13" x2="13" y2="13"/>
+      </svg>
+    </div>
+    <p class="ts-text">Survey<span>Whole company</span></p>
   </div>
 
-  <div class="cta-block">
-    <div>
-      <div class="cta-label">Want to know where you stand?</div>
-      <div class="cta-heading">Get in touch.</div>
+  <div class="ts-connector"></div>
+
+  <div class="ts-card">
+    <div class="ts-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="9" r="3"/>
+        <circle cx="16" cy="10" r="2.2" opacity="0.55"/>
+        <path d="M4.5 18.5c1.4-3.2 4-5 6.8-5 2.2 0 4.6 1.2 6.2 3.5" />
+      </svg>
     </div>
-    <a href="mailto:j4kepilgrim@gmail.com" class="cta-btn">Get in touch <span class="arrow">→</span></a>
+    <p class="ts-text">Interviews<span>6 x 30 mins</span></p>
+  </div>
+
+  <div class="ts-connector"></div>
+
+  <div class="ts-card ts-card--blue">
+    <div class="ts-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="12" r="1.5"/>
+        <circle cx="12" cy="6" r="1.5"/>
+        <circle cx="18" cy="12" r="1.5"/>
+        <circle cx="12" cy="18" r="1.5"/>
+        <path d="M7.2 10.8l3.6-3.6M13.2 7.2l3.6 3.6M16.8 13.2l-3.6 3.6M10.8 16.8l-3.6-3.6"/>
+      </svg>
+    </div>
+    <p class="ts-text">Synthesis<span>Patterns + opportunities</span></p>
+  </div>
+
+  <div class="ts-connector"></div>
+
+  <div class="ts-card">
+    <div class="ts-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="5" width="16" height="12" rx="2"/>
+        <path d="M8 21h8M12 17v4"/>
+      </svg>
+    </div>
+    <p class="ts-text">Management readout</p>
   </div>
 
 </div>
 
+<div class="t-cta">
+  <a href="mailto:j4kepilgrim@gmail.com">Start with the diagnostic →</a>
+</div>
+
 <footer class="site-footer">
-  <span class="footer-logo">AI Adoption Co</span>
+  <span class="footer-logo">Capable AI</span>
   <span class="footer-tagline">We help your team actually use AI.</span>
   <a href="mailto:j4kepilgrim@gmail.com" class="footer-contact">j4kepilgrim@gmail.com</a>
 </footer>
