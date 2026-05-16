@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Capable AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.contact-wrap {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px 100px;
+}
+.contact-block {
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+}
+.contact-email {
+  display: inline-block;
+  margin-top: 26px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 6vw, 58px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: #0e0c0a;
+  text-decoration: none;
+}
+.contact-email:hover {
+  color: #2563eb;
+}
+.contact-note {
+  margin-top: 18px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  color: #9a9080;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .contact-wrap { padding: 20px 20px 80px; }
+  .contact-note { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>→</span>
+      <span>Contact</span>
+    </div>
+    <span class="eyebrow">Contact</span>
+    <h1 class="display-heading">Get in touch.</h1>
+    <p class="intro-text">The best way to reach us is email.</p>
+  </div>
+</header>
+
+<div class="contact-wrap">
+  <div class="contact-block">
+    <a href="mailto:hello@capableai.io" class="contact-email">hello@capableai.io</a>
+    <p class="contact-note">Tell us a bit about your team and what you're trying to do. We'll come back to you within a day or two.</p>
+  </div>
+</div>
+
+<div class="site-nav" id="site-nav">
+  <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
+  <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
+  <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
+    <a href="index.html" class="site-nav-link">Home</a>
+    <div class="site-nav-group">
+      <a href="levels.html" class="site-nav-link">AI Levels</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="offers.html" class="site-nav-link">Offers</a>
+      <div class="site-nav-sub">
+        <a href="basic-training.html" class="site-nav-sublink">AI Basic Training</a>
+        <a href="advanced-training.html" class="site-nav-sublink">AI Advanced Training</a>
+        <a href="assessment.html" class="site-nav-sublink">AI Opportunity Assessment</a>
+      </div>
+    </div>
+    <div class="site-nav-group">
+      <a href="about.html" class="site-nav-link">About</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="contact.html" class="site-nav-link">Contact</a>
+    </div>
+  </div>
+</div>
+<script>
+function toggleSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  nav.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSiteNav();
+});
+</script>
+</body>
+</html>

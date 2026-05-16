@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Capable AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>→</span>
+      <span>About</span>
+    </div>
+    <span class="eyebrow">About</span>
+    <h1 class="display-heading">Capable AI</h1>
+    <p class="intro-text">Built on the belief that people deserve to be trained on the tools changing their world.</p>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <div class="page-section">
+    <h2 class="section-heading">Mission</h2>
+    <p class="body-text">AI is changing how work gets done, and most teams haven't been given a real chance to keep up. Capable AI exists to close that gap. We demystify the tools, build real confidence, so people don't fall behind. They get ahead.</p>
+  </div>
+
+  <div class="page-section">
+    <span class="section-label">The people behind it</span>
+    <p class="body-text">Capable AI is based in Sydney, built on fifteen years across digital transformation and the last two years deep inside enterprise AI. We know what these tools can (and can't!) do, what makes them feel confusing, and what good looks like. That's what we teach.</p>
+  </div>
+
+  <div class="page-section">
+    <div class="best-for-box">
+      <a href="mailto:j4kepilgrim@gmail.com" class="body-text" style="text-decoration:none;color:#0e0c0a;">Want to talk? Get in touch →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="footer-logo">Capable <span class="footer-logo-accent">AI</span></span>
+  <span class="footer-tagline">We help your team actually use AI.</span>
+  <div class="footer-links">
+    <a href="contact.html" class="footer-contact">Contact us</a>
+    <a href="privacy.html" class="footer-utility">Privacy Policy</a>
+  </div>
+</footer>
+
+<div class="site-nav" id="site-nav">
+  <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
+  <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
+  <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
+    <a href="index.html" class="site-nav-link">Home</a>
+    <div class="site-nav-group">
+      <a href="levels.html" class="site-nav-link">AI Levels</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="offers.html" class="site-nav-link">Offers</a>
+      <div class="site-nav-sub">
+        <a href="basic-training.html" class="site-nav-sublink">AI Basic Training</a>
+        <a href="advanced-training.html" class="site-nav-sublink">AI Advanced Training</a>
+        <a href="assessment.html" class="site-nav-sublink">AI Opportunity Assessment</a>
+      </div>
+    </div>
+    <div class="site-nav-group">
+      <a href="about.html" class="site-nav-link">About</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="contact.html" class="site-nav-link">Contact</a>
+    </div>
+  </div>
+</div>
+<script>
+function toggleSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  nav.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSiteNav();
+});
+</script>
+</body>
+</html>

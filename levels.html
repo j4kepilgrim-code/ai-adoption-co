@@ -336,19 +336,13 @@
   <a href="offers.html">See how we move your team up the levels <span class="lf-arrow">→</span></a>
 </div>
 
-<footer class="site-footer">
-  <span class="footer-logo">Capable AI</span>
-  <span class="footer-tagline">We help your team actually use AI.</span>
-  <a href="mailto:j4kepilgrim@gmail.com" class="footer-contact">j4kepilgrim@gmail.com</a>
-</footer>
-
 <script>
 const levels = {
   0: {
     name: 'Passenger',
     label: 'Level 0',
     lc: '#93c5fd',
-    offer: { href: 'training.html', label: 'AI Basic Training →' },
+    offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Where most teams are after six months of paying for an enterprise plan.",
     bullets: [
       "Opens the tool, gets something underwhelming, closes the tab",
@@ -363,7 +357,7 @@ const levels = {
     name: 'Driver',
     label: 'Level 1',
     lc: '#60a5fa',
-    offer: { href: 'training.html', label: 'AI Basic Training →' },
+    offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Getting useful outputs regularly and starting to understand why.",
     bullets: [
       "Treats the first response as a draft, not a verdict",
@@ -379,7 +373,7 @@ const levels = {
     name: 'Builder',
     label: 'Level 2',
     lc: '#3b82f6',
-    offer: { href: 'training.html', label: 'AI Basic Training →' },
+    offer: { href: 'basic-training.html', label: 'AI Basic Training →' },
     hook: "Using AI in a way that's repeatable, not just occasional.",
     bullets: [
       "Prompt instructions are saved, not retyped every session",
@@ -504,21 +498,45 @@ function selectLevel(num) {
 }
 </script>
 
-<div class="nav-dot" id="nav-dot">
-  <div class="nav-dot-menu" id="nav-menu">
-    <a href="index.html" class="nav-dot-item">Home</a>
-    <a href="offers.html" class="nav-dot-item">Our Offers</a>
-    <a href="mailto:j4kepilgrim@gmail.com" class="nav-dot-item">Get in touch</a>
+<div class="site-nav" id="site-nav">
+  <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
+  <div class="site-nav-backdrop" onclick="closeSiteNav()"></div>
+  <div class="site-nav-panel" role="dialog" aria-label="Site navigation">
+    <a href="index.html" class="site-nav-link">Home</a>
+    <div class="site-nav-group">
+      <a href="levels.html" class="site-nav-link">AI Levels</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="offers.html" class="site-nav-link">Offers</a>
+      <div class="site-nav-sub">
+        <a href="basic-training.html" class="site-nav-sublink">AI Basic Training</a>
+        <a href="advanced-training.html" class="site-nav-sublink">AI Advanced Training</a>
+        <a href="assessment.html" class="site-nav-sublink">AI Opportunity Assessment</a>
+      </div>
+    </div>
+    <div class="site-nav-group">
+      <a href="about.html" class="site-nav-link">About</a>
+    </div>
+    <div class="site-nav-group">
+      <a href="contact.html" class="site-nav-link">Contact</a>
+    </div>
   </div>
-  <button class="nav-dot-btn" onclick="toggleNavDot()" aria-label="Menu"></button>
 </div>
 <script>
-function toggleNavDot() {
-  document.getElementById('nav-menu').classList.toggle('open');
+function toggleSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
-document.addEventListener('click', function(e) {
-  const dot = document.getElementById('nav-dot');
-  if (dot && !dot.contains(e.target)) document.getElementById('nav-menu').classList.remove('open');
+function closeSiteNav() {
+  const nav = document.getElementById('site-nav');
+  const btn = nav.querySelector('.site-nav-btn');
+  nav.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSiteNav();
 });
 </script>
 </body>
