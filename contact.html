@@ -35,6 +35,7 @@
 .contact-card:hover {
   transform: translate(-2px, -2px);
   box-shadow: 10px 10px 0 #2563eb;
+  cursor: pointer;
 }
 
 .contact-email {
@@ -71,12 +72,22 @@
 <body>
 
 <div class="contact-page">
-  <a href="mailto:hello@capableai.io" class="contact-card">
-    <span class="contact-email">hello@capableai.io</span>
+  <div class="contact-card" onclick="copyEmail()" role="button" tabindex="0" aria-label="Copy email address">
+    <span class="contact-email" id="contact-email-text">hello@capableai.io</span>
     <hr class="contact-divider">
-    <p class="contact-note">Tell us about your team and what you're trying to do. We'll come back to you within a day.</p>
-  </a>
+    <p class="contact-note">Let's get your team actually using AI.</p>
+  </div>
 </div>
+
+<script>
+function copyEmail() {
+  navigator.clipboard.writeText('hello@capableai.io').then(() => {
+    const el = document.getElementById('contact-email-text');
+    el.textContent = 'Copied ✓';
+    setTimeout(() => { el.textContent = 'hello@capableai.io'; }, 2000);
+  });
+}
+</script>
 
 <div class="site-nav" id="site-nav">
   <button class="site-nav-btn" type="button" onclick="toggleSiteNav()" aria-label="Open menu" aria-expanded="false">Menu</button>
