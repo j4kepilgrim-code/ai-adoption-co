@@ -29,9 +29,20 @@ body { min-height: 100vh; }
 }
 
 /* ── CARDS ── */
+[data-offer="0"] { --oc: #bfdbfe; }
 [data-offer="1"] { --oc: #60a5fa; }
 [data-offer="2"] { --oc: #2563eb; }
 [data-offer="3"] { --oc: #1e3a8a; }
+
+.featured-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.featured-row .offer-card {
+  max-width: 340px;
+  width: 100%;
+}
 
 .cards-row {
   display: grid;
@@ -218,6 +229,21 @@ body { min-height: 100vh; }
       <span class="offers-idle-text">Pick an offer</span>
     </div>
 
+    <div class="featured-row">
+      <div class="offer-card" data-offer="0" onclick="selectOffer(0)">
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 24C8 14 15 8 24 8C33 8 40 14 44 24C40 34 33 40 24 40C15 40 8 34 4 24Z"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="24" r="7" stroke="currentColor" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="card-num">00</div>
+        <div class="card-name">AI Executive Essentials</div>
+        <div class="card-desc">One hour. Clear picture. For leadership teams.</div>
+      </div>
+    </div>
+
     <div class="cards-row">
 
       <div class="offer-card" data-offer="1" onclick="selectOffer(1)">
@@ -283,6 +309,7 @@ body { min-height: 100vh; }
     <div class="site-nav-group">
       <a href="offers.html" class="site-nav-link">Offers</a>
       <div class="site-nav-sub">
+        <a href="executive-essentials.html" class="site-nav-sublink">AI Executive Essentials</a>
         <a href="basic-training.html" class="site-nav-sublink">AI Basic Training</a>
         <a href="advanced-training.html" class="site-nav-sublink">AI Advanced Training</a>
         <a href="assessment.html" class="site-nav-sublink">AI Opportunity Assessment</a>
@@ -301,6 +328,12 @@ body { min-height: 100vh; }
 
 <script>
 const offers = {
+  0: {
+    text: "A one-hour session for leadership teams who want a clear, honest picture of AI before committing to anything. Covers the state of the industry, what good governance looks like, and how to decide where AI fits for your organisation.",
+    chips: null,
+    href: "executive-essentials.html",
+    lc: "#bfdbfe"
+  },
   1: {
     text: "A half-day on-site session for the whole team. We cover the fundamentals — how AI actually works, how to give it the context it needs, and how to set up repeatable tasks that save your team time every day. Hands-on throughout.",
     chips: [
