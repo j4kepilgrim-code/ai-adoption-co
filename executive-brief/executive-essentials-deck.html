@@ -413,96 +413,295 @@ body {
 .s3-fragment strong { color: rgba(255,255,255,0.6); font-weight: 500; }
 
 /* ── SLIDE 4: SIGNALS ── */
-.s4-tiles {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
+.s4-stats {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
   margin-top: 12px;
 }
-.s4-tile { flex: 1; }
-.s4-tile:nth-child(2) { margin-top: 40px; }
-.s4-tile:nth-child(3) { margin-top: 80px; }
+.s4-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 36px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.s4-stat:last-child { border-bottom: none; }
+.s4-num {
+  font-family: var(--font);
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  min-width: 148px;
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 28%, #2563eb 62%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+}
+/* ½ rendered as styled fraction */
+.s4-frac {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1;
+}
+.s4-frac-n, .s4-frac-d {
+  font-size: 0.52em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.s4-frac-n { vertical-align: super; }
+.s4-frac-d { vertical-align: sub; }
+.s4-frac-slash {
+  font-size: 0.85em;
+  font-weight: 300;
+  opacity: 0.6;
+  line-height: 1;
+}
+.s4-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 2px;
+}
+.s4-cap {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.s4-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--warm);
+  line-height: 1.55;
+}
+.s4-punchline {
+  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  font-weight: 300;
+  color: var(--near-blk);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+}
+.s4-punchline em { font-style: italic; font-weight: 500; }
 
 /* ── SLIDE 5: ARCHITECTURE DIAGRAM ── */
-#s5 { padding: 48px 64px; }
+#s5 { padding: 48px 64px !important; flex-direction: row !important; align-items: center; gap: 0; justify-content: center; }
+.s5-left { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: padding-right 0.4s ease; }
+.s5-right {
+  width: 0; min-width: 0; overflow: hidden;
+  opacity: 0; pointer-events: none;
+  display: flex; align-items: center;
+  flex-shrink: 0;
+  transition: width 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease 0.2s;
+}
+#s5.s5-shifted .s5-left { flex: 0 0 auto; padding-right: 32px; }
+#s5.s5-shifted .s5-right { flex: 0 0 340px; width: 340px; overflow: visible; opacity: 1; pointer-events: all; }
 .s5-arena {
   position: relative;
-  width: 640px;
+  width: 580px;
   height: 570px;
   flex-shrink: 0;
 }
 .s5-lines {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: visible;
+  position: absolute; inset: 0;
+  pointer-events: none; overflow: visible;
 }
 .s5-line {
-  stroke: #e2e8f0;
-  stroke-width: 1.5;
-  stroke-dasharray: 220;
-  stroke-dashoffset: 220;
-  transition: stroke-dashoffset 0.55s cubic-bezier(0.4,0,0.2,1);
+  stroke: #e2e8f0; stroke-width: 1.5;
+  stroke-dasharray: 220; stroke-dashoffset: 220;
+  transition: stroke-dashoffset 0.55s cubic-bezier(0.4,0,0.2,1), stroke 0.15s ease, stroke-width 0.15s ease;
 }
 .s5-line.on { stroke-dashoffset: 0; }
 .s5-brain {
-  position: absolute;
-  left: 320px; top: 290px;
+  position: absolute; left: 290px; top: 290px;
   transform: translate(-50%, -50%);
-  width: 84px; height: 84px;
-  border-radius: 50%;
-  border: 2px solid var(--b4);
-  background: #fff;
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 2px solid var(--b4); background: #fff;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 2px; z-index: 2;
   box-shadow: 0 0 0 6px rgba(37,99,235,0.06);
 }
-.s5-brain-label {
-  font-family: var(--mono);
-  font-size: 8px; letter-spacing: 0.14em;
-  color: var(--b4); text-transform: uppercase;
-}
+.s5-brain-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; color: var(--b4); text-transform: uppercase; }
 .s5-node {
   position: absolute;
   transform: translate(-50%, -50%) scale(0.72);
   display: flex; flex-direction: column;
-  align-items: center; gap: 7px;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  align-items: center; gap: 7px; z-index: 2;
+  opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .s5-node.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .s5-node-circle {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 1.5px solid #e2e8f0;
-  background: #fff;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px solid #e2e8f0; background: #fff;
   display: flex; align-items: center; justify-content: center;
-  color: #94a3b8;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  color: #94a3b8; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: border-color 0.15s, color 0.15s, box-shadow 0.15s;
 }
-.s5-node.people .s5-node-circle { border-color: #bfdbfe; color: var(--b3); }
 .s5-node-label {
-  font-family: var(--mono);
-  font-size: 9px; letter-spacing: 0.1em;
-  color: #94a3b8; text-transform: uppercase;
-  white-space: nowrap;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  color: #94a3b8; text-transform: uppercase; white-space: nowrap;
+  transition: color 0.15s;
 }
-.s5-node.people .s5-node-label { color: var(--b3); }
+/* People — no default highlight, behaves like all other nodes */
+/* Interactive states */
+.s5-interactive .s5-node { cursor: pointer; }
+/* Hover: circle + label go blue (line handled via JS) */
+.s5-interactive .s5-node:hover .s5-node-circle { border-color: var(--b3); color: var(--b3); }
+.s5-interactive .s5-node:hover .s5-node-label { color: var(--b4); }
+/* Active: selected node stays blue */
+.s5-node.active .s5-node-circle { border-color: var(--b3); color: var(--b3); box-shadow: 0 0 0 5px rgba(59,130,246,0.12); }
+.s5-node.active .s5-node-label { color: var(--b4); font-weight: 500; }
+/* Hover line (class added by JS) */
+.s5-line.s5-line-hover { stroke: var(--b3); stroke-width: 2; }
+/* Active line */
+.s5-line.s5-line-active { stroke: var(--b3); stroke-width: 2; }
+/* Panel open: dim everything not active */
+#s5.panel-open .s5-node:not(.active) .s5-node-circle { border-color: #edf0f3; color: #c8cdd3; box-shadow: none; }
+#s5.panel-open .s5-node:not(.active) .s5-node-label { color: #c8cdd3; }
+#s5.panel-open .s5-line:not(.s5-line-active) { stroke: #edf0f3; }
+/* Hover still wins even when others are dimmed (comes after panel-open rules) */
+#s5.panel-open .s5-interactive .s5-node:not(.active):hover .s5-node-circle { border-color: var(--b3); color: var(--b3); }
+#s5.s5-interactive.panel-open .s5-node:not(.active):hover .s5-node-label { color: var(--b4); }
+/* Pull line */
 .s5-pull-line {
-  margin-top: 18px;
-  font-family: var(--font);
-  font-size: 13px; font-weight: 300;
-  color: var(--warm); text-align: center;
+  position: absolute;
+  bottom: 44px;
+  left: 64px; right: 64px;
+  text-align: center;
+  font-family: var(--font); font-size: 13px; font-weight: 300; color: var(--warm);
   opacity: 0; transition: opacity 0.6s ease;
 }
 .s5-pull-line.on { opacity: 1; }
-@keyframes s5Out { to { opacity: 0; transform: translateX(-18px); } }
-.s5-exit { animation: s5Out 0.22s ease forwards; }
+/* Hint */
+.s5-hint { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; color: #c0c8d4; text-align: center; margin-top: 6px; opacity: 0; transition: opacity 0.5s ease; }
+.s5-hint.on { opacity: 1; }
+.s5-hint.hidden { opacity: 0 !important; }
+/* Detail panel */
+.s5-panel { background: #fff; border: 1px solid var(--line); border-radius: 3px; box-shadow: 6px 6px 0 rgba(37,99,235,0.06); padding: 28px 30px; width: 100%; }
+.s5-panel-node { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--b4); text-transform: uppercase; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.s5-panel-section { margin-bottom: 18px; }
+.s5-panel-section:last-child { margin-bottom: 0; }
+.s5-panel-lbl { font-family: var(--mono); font-size: 8px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+.s5-panel-body { font-size: 13px; font-weight: 300; color: var(--warm); line-height: 1.65; }
 
-/* ── SLIDE 6:/* ── SLIDE 6: SPEED TO VALUE ── */
+
+/* ── SLIDE 5b: WORKED EXAMPLE FLOW ── */
+#s5b { gap: 0; padding: 48px 64px; }
+.s5b-title {
+  font-family: var(--font); font-size: clamp(1.1rem,1.8vw,1.5rem);
+  font-weight: 600; letter-spacing: -0.025em; color: var(--near-blk); line-height: 1.25;
+}
+
+/* Trigger button */
+.s5b-trigger-wrap { margin: 36px 0 0; display: flex; align-items: flex-start; }
+.s5b-trigger-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--b4); background: #fff;
+  border: 1px solid var(--b2); border-radius: 3px;
+  padding: 9px 14px; cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(37,99,235,0.09);
+  transition: box-shadow 0.15s, transform 0.15s, opacity 0.3s;
+}
+.s5b-trigger-btn:hover { box-shadow: 5px 5px 0 rgba(37,99,235,0.15); transform: translateY(-1px); }
+.s5b-trigger-btn.triggered { opacity: 0.35; pointer-events: none; box-shadow: 2px 2px 0 rgba(37,99,235,0.05); }
+
+/* Flow area */
+.s5b-flow-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+.s5b-flow-rel { position: relative; width: 100%; }
+
+/* Card (appears above active node) */
+.s5b-card {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  transform: translateX(-50%);
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: 6px 6px 0 rgba(37,99,235,0.07);
+  border-radius: 3px; padding: 14px 18px;
+  min-width: 160px; max-width: 220px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+.s5b-card.on { opacity: 1; }
+.s5b-card::after {
+  content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 14px; background: #bfdbfe;
+}
+.s5b-card-name {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em;
+  color: var(--b4); text-transform: uppercase; margin-bottom: 6px;
+}
+.s5b-card-text { font-size: 12.5px; font-weight: 300; font-style: italic; color: var(--warm); line-height: 1.5; }
+
+/* Flow row — positioning context for card */
+.s5b-row { display: flex; align-items: flex-start; justify-content: center; width: 100%; position: relative; overflow: visible; }
+
+/* Nodes — hidden initially */
+#s5b .s5b-node {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  flex-shrink: 0; width: 92px;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+#s5b .s5b-node.s5b-active,
+#s5b .s5b-node.s5b-done { opacity: 1; }
+/* Active: blue */
+#s5b .s5b-node.s5b-active .s5b-nc { border-color: var(--b3); color: var(--b3); }
+#s5b .s5b-node.s5b-active.hub .s5b-nc { background: var(--b4); border-color: var(--b4); color: #fff; box-shadow: 0 0 0 7px rgba(37,99,235,0.08); }
+#s5b .s5b-node.s5b-active .s5b-nl { color: var(--b4); font-weight: 500; }
+/* Done: grey */
+#s5b .s5b-node.s5b-done .s5b-nc { border-color: #e2e8f0; color: #94a3b8; background: #fff; box-shadow: none; }
+#s5b .s5b-node.s5b-done.hub .s5b-nc { background: #f8f9fb; border-color: #e2e8f0; color: #94a3b8; box-shadow: none; }
+#s5b .s5b-node.s5b-done .s5b-nl { color: #94a3b8; font-weight: 400; }
+
+.s5b-nc {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1.5px solid #e2e8f0; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  color: #94a3b8; transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.s5b-node.hub .s5b-nc { width: 62px; height: 62px; }
+.s5b-nl {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+  color: #94a3b8; text-transform: uppercase; text-align: center; white-space: nowrap;
+  transition: color 0.2s;
+}
+
+/* Connectors — line draws in, arrow fades */
+.s5b-conn { flex-shrink: 0; width: 28px; display: flex; align-items: flex-start; padding-top: 15px; justify-content: center; }
+#s5b .s5b-conn svg line {
+  stroke-dasharray: 26; stroke-dashoffset: 26;
+  transition: stroke-dashoffset 0.3s ease;
+}
+#s5b .s5b-conn.on svg line { stroke-dashoffset: 0; }
+#s5b .s5b-conn svg polyline { opacity: 0; transition: opacity 0.15s ease 0.25s; }
+#s5b .s5b-conn.on svg polyline { opacity: 1; }
+
+/* Caption / outcome — hidden until done */
+.s5b-caption {
+  font-family: var(--font); font-size: 13px; font-weight: 300;
+  color: var(--warm); text-align: center;
+  opacity: 0; transition: opacity 0.5s ease; margin-top: 8px;
+}
+.s5b-caption.on { opacity: 1; }
+.s5b-outcome {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.05em; color: #c0c8d4;
+  text-align: center; margin-top: 5px; line-height: 1.6;
+  opacity: 0; transition: opacity 0.5s ease 0.3s;
+}
+.s5b-outcome.on { opacity: 1; }
+
+/* ── SLIDE 6: SPEED TO VALUE ── */
 .s6-cols {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -830,137 +1029,132 @@ body {
 
 <!-- ══ S4: THE SIGNALS ══ -->
 <div class="slide grid" id="s4">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>The signals</div>
-  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0">The numbers are clear.</h2>
-  <div class="s4-tiles">
-    <div class="s4-tile">
-      <div class="card" style="--s:var(--b2)">
-        <div class="card-num">$725B</div>
-        <div class="card-label">Hyperscaler capex · 2026</div>
-        <div class="card-body">Up 75% on 2025. The infrastructure bet is placed.</div>
-        <div class="card-cite">CloudZero / TechJournal · 2026</div>
+  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0;font-weight:600;">Measure twice, cut once.</h2>
+  <div class="s4-stats">
+
+    <div class="s4-stat">
+      <div class="s4-num">$725B</div>
+      <div class="s4-text">
+        <div class="s4-cap">Hyperscaler capex · 2026 · +75% YoY</div>
+        <div class="s4-desc">The infrastructure bet is placed. It will be built with or without your organisation's strategy.</div>
       </div>
     </div>
-    <div class="s4-tile">
-      <div class="card" style="--s:var(--b4)">
-        <div class="card-num">50%</div>
-        <div class="card-label">Of IT budget · some firms</div>
-        <div class="card-body">Cost up. Value flat. Leadership is asking why.</div>
-        <div class="card-cite">Deloitte via InformationWeek · 2026</div>
+
+    <div class="s4-stat">
+      <div class="s4-num">50%</div>
+      <div class="s4-text">
+        <div class="s4-cap">Of IT budget at some firms · Deloitte</div>
+        <div class="s4-desc">Half the technology budget committed to AI before the value case is designed.</div>
       </div>
     </div>
-    <div class="s4-tile">
-      <div class="card" style="--s:var(--b6)">
-        <div class="card-num">½</div>
-        <div class="card-label">AI layoffs reversed · Gartner</div>
-        <div class="card-body">Headcount is oscillating. Strategy is not.</div>
-        <div class="card-cite">Gartner · 2026</div>
+
+    <div class="s4-stat">
+      <div class="s4-num"><span class="s4-frac"><span class="s4-frac-n">1</span><span class="s4-frac-slash">/</span><span class="s4-frac-d">2</span></span></div>
+      <div class="s4-text">
+        <div class="s4-cap">AI layoffs reversed in 12 months · Gartner</div>
+        <div class="s4-desc">Headcount cut, then rehired. Reactive decisions, made at pace, in the wrong order.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="s4-punchline">How you enter this changes whether you compound up or compound <em>down.</em></div>
+</div>
+
+<!-- ══ S5: ARCHITECTURE DIAGRAM ══ -->
+<div class="slide grid" id="s5">
+  <div class="s5-left">
+    <div class="s5-arena">
+      <svg class="s5-lines" viewBox="0 0 580 570">
+      <line class="s5-line" data-id="people" x1="290" y1="290" x2="166" y2="166"/>
+      <line class="s5-line" data-id="system-prompt" x1="290" y1="290" x2="290" y2="115"/>
+      <line class="s5-line" data-id="documents" x1="290" y1="290" x2="414" y2="166"/>
+      <line class="s5-line" data-id="tools" x1="290" y1="290" x2="465" y2="290"/>
+      <line class="s5-line" data-id="integrations" x1="290" y1="290" x2="414" y2="414"/>
+      <line class="s5-line" data-id="evals" x1="290" y1="290" x2="290" y2="465"/>
+      <line class="s5-line" data-id="memory" x1="290" y1="290" x2="166" y2="414"/>
+      <line class="s5-line" data-id="guardrails" x1="290" y1="290" x2="115" y2="290"/>
+      </svg>
+      <!-- Brain hub -->
+      <div class="s5-brain">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--b4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12Q5 6 8 12Q11 18 14 12Q17 6 20 12"/><circle cx="3.5" cy="12" r="1.5"/><circle cx="20.5" cy="12" r="1.5"/></svg>
+        <div class="s5-brain-label">LLM</div>
+      </div>
+    <div class="s5-node people" data-id="people" style="left:166px;top:166px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      <div class="s5-node-label">People</div>
+    </div>
+    <div class="s5-node" data-id="system-prompt" style="left:290px;top:115px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 2 12 4 15"/><polyline points="20 9 22 12 20 15"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div>
+      <div class="s5-node-label">System prompt</div>
+    </div>
+    <div class="s5-node" data-id="documents" style="left:414px;top:166px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg></div>
+      <div class="s5-node-label">Documents</div>
+    </div>
+    <div class="s5-node" data-id="tools" style="left:465px;top:290px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <div class="s5-node-label">Tools</div>
+    </div>
+    <div class="s5-node" data-id="integrations" style="left:414px;top:414px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="15" width="6" height="6" rx="1"/><path d="M8 6h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4"/><path d="M16 18h-3a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H8"/></svg></div>
+      <div class="s5-node-label">Integrations</div>
+    </div>
+    <div class="s5-node" data-id="evals" style="left:290px;top:465px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+      <div class="s5-node-label">Evals</div>
+    </div>
+    <div class="s5-node" data-id="memory" style="left:166px;top:414px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"/></svg></div>
+      <div class="s5-node-label">Memory</div>
+    </div>
+    <div class="s5-node" data-id="guardrails" style="left:115px;top:290px;">
+      <div class="s5-node-circle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="s5-node-label">Guardrails</div>
+    </div>
+    </div>
+    <div class="s5-hint" id="s5-hint">click any component to explore</div>
+    <div class="s5-pull-line" id="s5-pull">The value isn't in the model. It's in the architecture around it.</div>
+  </div>
+  <div id="s5-right" class="s5-right">
+    <div class="s5-panel">
+      <div class="s5-panel-node" id="s5-panel-name"></div>
+      <div class="s5-panel-section">
+        <div class="s5-panel-lbl">What it is</div>
+        <div class="s5-panel-body" id="s5-panel-what"></div>
+      </div>
+      <div class="s5-panel-section">
+        <div class="s5-panel-lbl">What good looks like</div>
+        <div class="s5-panel-body" id="s5-panel-good"></div>
+      </div>
+      <div class="s5-panel-section">
+        <div class="s5-panel-lbl">What goes wrong</div>
+        <div class="s5-panel-body" id="s5-panel-wrong"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ S5: ARCHITECTURE DIAGRAM ══ -->
-<div class="slide grid" id="s5" style="align-items:center;justify-content:center;">
+<!-- ══ S5b: WORKED EXAMPLE FLOW ══ -->
+<div class="slide grid" id="s5b">
+  <h2 class="s5b-title">Worked example — building a proposal when an opportunity moves to sales stage 3.</h2>
 
-  <div class="s5-arena">
+  <div class="s5b-trigger-wrap">
+    <button class="s5b-trigger-btn" id="s5b-trigger" onclick="startS5b()">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg>
+      Trigger: opportunity reaches Proposal stage in CRM
+    </button>
+  </div>
 
-    <!-- Connecting lines (drawn behind nodes) -->
-    <svg class="s5-lines" viewBox="0 0 640 570">
-      <line class="s5-line" x1="320" y1="290" x2="168" y2="168"/><!-- People -->
-      <line class="s5-line" x1="320" y1="290" x2="320" y2="95"/> <!-- System prompt -->
-      <line class="s5-line" x1="320" y1="290" x2="472" y2="168"/><!-- Documents -->
-      <line class="s5-line" x1="320" y1="290" x2="510" y2="333"/><!-- Tools -->
-      <line class="s5-line" x1="320" y1="290" x2="404" y2="466"/><!-- Integrations -->
-      <line class="s5-line" x1="320" y1="290" x2="236" y2="466"/><!-- Triggers -->
-      <line class="s5-line" x1="320" y1="290" x2="130" y2="333"/><!-- Guardrails -->
-    </svg>
-
-    <!-- Brain (always visible) -->
-    <div class="s5-brain">
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--b4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M2 12Q5 6 8 12Q11 18 14 12Q17 6 20 12"/>
-        <circle cx="3.5" cy="12" r="1.5"/><circle cx="20.5" cy="12" r="1.5"/>
-      </svg>
-      <div class="s5-brain-label">LLM</div>
-    </div>
-
-    <!-- Node 1: People / human prompts (top-left 168,168) -->
-    <div class="s5-node people" style="left:168px;top:168px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-        </svg>
+  <div class="s5b-flow-wrap">
+    <div class="s5b-flow-rel">
+      <div class="s5b-row">
+        <div class="s5b-card" id="s5b-card"><div class="s5b-card-name" id="s5b-card-name"></div><div class="s5b-card-text" id="s5b-card-text"></div></div>
+<div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 9 2 12 4 15"/><polyline points="20 9 22 12 20 15"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div><div class="s5b-nl">System prompt</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"/></svg></div><div class="s5b-nl">Memory</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg></div><div class="s5b-nl">Documents</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="s5b-nl">Tools</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node hub"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12Q5 6 8 12Q11 18 14 12Q17 6 20 12"/><circle cx="3.5" cy="12" r="1.5"/><circle cx="20.5" cy="12" r="1.5"/></svg></div><div class="s5b-nl">LLM</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="s5b-nl">Guardrails</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="s5b-nl">People</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="15" width="6" height="6" rx="1"/><path d="M8 6h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4"/><path d="M16 18h-3a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H8"/></svg></div><div class="s5b-nl">Integrations</div></div><div class="s5b-conn"><svg width="28" height="20" viewBox="0 0 28 20" fill="none"><line x1="1" y1="10" x2="23" y2="10" stroke="#bfdbfe" stroke-width="1.5"/><polyline points="18,5 24,10 18,15" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s5b-node"><div class="s5b-nc"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div><div class="s5b-nl">Evals</div></div>
       </div>
-      <div class="s5-node-label">People</div>
     </div>
-
-    <!-- Node 2: System prompt (top 320,95) -->
-    <div class="s5-node" style="left:320px;top:95px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="4 9 2 12 4 15"/><polyline points="20 9 22 12 20 15"/><line x1="14" y1="4" x2="10" y2="20"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">System prompt</div>
-    </div>
-
-    <!-- Node 3: Documents (top-right 472,168) -->
-    <div class="s5-node" style="left:472px;top:168px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">Documents</div>
-    </div>
-
-    <!-- Node 4: Tools (right 510,333) -->
-    <div class="s5-node" style="left:510px;top:333px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">Tools</div>
-    </div>
-
-    <!-- Node 5: Integrations (bottom-right 404,466) -->
-    <div class="s5-node" style="left:404px;top:466px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="15" width="6" height="6" rx="1"/>
-          <path d="M8 6h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4"/><path d="M16 18h-3a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H8"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">Integrations</div>
-    </div>
-
-    <!-- Node 6: Triggers (bottom-left 236,466) -->
-    <div class="s5-node" style="left:236px;top:466px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">Triggers</div>
-    </div>
-
-    <!-- Node 7: Guardrails (left 130,333) -->
-    <div class="s5-node" style="left:130px;top:333px;">
-      <div class="s5-node-circle">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-      </div>
-      <div class="s5-node-label">Guardrails</div>
-    </div>
-
-  </div><!-- /arena -->
-
-  <div class="s5-pull-line" id="s5-pull">The value isn't in the model. It's in the architecture around it.</div>
-
+    <div class="s5b-caption" id="s5b-caption">Eight components doing real work. The model is one of them.</div>
+    <div class="s5b-outcome" id="s5b-outcome">the outcome: a draft proposal that's grounded, on-brand, and checked before it goes out the door.</div>
+  </div>
 </div>
 
 <!-- ══ S6: SPEED TO VALUE ══ -->
@@ -1214,44 +1408,274 @@ function go(n) {
 // ── S5 STEP LOGIC ──
 let s5Step = 0;
 const S5_IDX = 4; // slide index (0-based)
-const S5_NODES = 7;
+const S5_NODES = 8;
 
 function resetS5() {
   s5Step = 0;
-  document.querySelectorAll('#s5 .s5-node').forEach(n => n.classList.remove('on'));
+  s5Shifted = false;
+  s5ActivePanel = null;
+  const s5el = document.getElementById('s5');
+  s5el.classList.remove('s5-shifted', 's5-interactive', 'panel-open');
+  document.querySelectorAll('#s5 .s5-line').forEach(l => l.classList.remove('s5-line-active','s5-line-hover'));
+  document.querySelectorAll('#s5 .s5-node').forEach(n => n.classList.remove('on', 'active'));
   document.querySelectorAll('#s5 .s5-line').forEach(l => l.classList.remove('on'));
-  const pull = document.getElementById('s5-pull');
-  if (pull) pull.classList.remove('on');
-  document.getElementById('s5').classList.remove('s5-exit');
+  ['s5-pull','s5-hint'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('on', 'hidden');
+  });
+}
+
+let s5Shifted = false;
+let s5ActivePanel = null;
+
+const s5Panels = {
+  'system-prompt': {
+    name: 'System prompt',
+    what:  "Instructions you write once that tell the AI how to behave — what tone to use, what it's there to do, and what it shouldn't say.",
+    good:  "It reads like briefing notes from someone who actually knows the job, not a generic template copied from somewhere else.",
+    wrong: "You use a prompt from the internet and the AI sounds like every other company's AI rather than yours."
+  },
+  'people': {
+    name: 'People',
+    what:  "The people who review, question or redirect what the AI produces before it reaches anyone outside the organisation.",
+    good:  "Someone specific owns each step and knows what they're checking, what they're approving, and when to flag something.",
+    wrong: "Either no one is checking and things go out unreviewed, or everyone is checking and the whole thing grinds to a halt."
+  },
+  'documents': {
+    name: 'Documents',
+    what:  "The background material the AI can draw on — past work, policies, case studies, anything it needs to give a useful answer.",
+    good:  "It is kept current and well-organised so the AI only pulls in what is actually relevant to the question being asked.",
+    wrong: "You load everything you have and hope for the best. The AI finds something outdated and gives a confident but wrong answer."
+  },
+  'tools': {
+    name: 'Tools',
+    what:  "Things the AI can do mid-task — look up a live price, pull a record from a system, or run a calculation it needs.",
+    good:  "Each tool does one thing clearly. You can see exactly when it ran and what it returned.",
+    wrong: "Give it too many options that overlap and it starts guessing which to use, or skips them and makes the answer up."
+  },
+  'integrations': {
+    name: 'Integrations',
+    what:  "The connections between the AI and the software your team already uses — what starts it running and where the output lands.",
+    good:  "It fits so naturally into the existing workflow that the work just gets done, without anyone needing to think about the AI.",
+    wrong: "You end up with a separate tool nobody opens, or staff manually copying outputs from one system to another all day."
+  },
+  'guardrails': {
+    name: 'Guardrails',
+    what:  "The limits the AI has to stay within — things it cannot say, topics it will not engage with, claims it cannot make without evidence.",
+    good:  "They are built for your situation and run automatically before anything reaches a human, not added as an afterthought.",
+    wrong: "Either the restrictions are so broad they stop it doing anything useful, or there are none and something embarrassing goes out."
+  },
+  'memory': {
+    name: 'Memory',
+    what:  "What the AI retains between interactions — previous conversations, relevant context, anything that makes the next response more useful.",
+    good:  "It picks up where things left off without carrying in context from interactions that have nothing to do with the current one.",
+    wrong: "It treats every conversation like the first one, or drags in so much history that it loses the thread of what you actually asked."
+  },
+  'evals': {
+    name: 'Evals',
+    what:  "The process for checking whether what the AI produces is actually any good — accurate, consistent, and worth the time it saves.",
+    good:  "You have a clear answer when someone asks whether any of this is making a difference. Not a feeling — an actual answer.",
+    wrong: "You skip this, assume it is working, and a year later you cannot explain to anyone whether it was worth doing."
+  }
+};
+
+function openS5Panel(id) {
+  const d = s5Panels[id]; if (!d) return;
+  s5ActivePanel = id;
+  document.querySelectorAll('#s5 .s5-node').forEach(n => n.classList.toggle('active', n.dataset.id === id));
+  document.querySelectorAll('#s5 .s5-line').forEach(l => l.classList.remove('s5-line-active'));
+  const al = document.querySelector(`#s5 .s5-lines [data-id="${id}"]`);
+  if (al) al.classList.add('s5-line-active');
+  document.getElementById('s5').classList.add('panel-open');
+  document.getElementById('s5-panel-name').textContent = d.name;
+  document.getElementById('s5-panel-what').textContent = d.what;
+  document.getElementById('s5-panel-good').textContent = d.good;
+  document.getElementById('s5-panel-wrong').textContent = d.wrong;
+}
+
+function shiftS5() {
+  s5Shifted = true;
+  document.getElementById('s5').classList.add('s5-shifted');
+  const hint = document.getElementById('s5-hint');
+  if (hint) hint.classList.add('hidden');
+  setTimeout(() => openS5Panel('people'), 350);
+}
+
+function closeS5Panel() {
+  document.getElementById('s5').classList.remove('panel-open');
+  document.querySelectorAll('#s5 .s5-line').forEach(l => l.classList.remove('s5-line-active'));
+  openS5Panel('people');
+}
+
+function initS5Hover() {
+  document.querySelectorAll('#s5 .s5-node').forEach(node => {
+    node.addEventListener('mouseenter', () => {
+      if (!document.getElementById('s5').classList.contains('s5-interactive')) return;
+      const line = document.querySelector(`#s5 .s5-lines [data-id="${node.dataset.id}"]`);
+      if (line && !line.classList.contains('s5-line-active')) line.classList.add('s5-line-hover');
+    });
+    node.addEventListener('mouseleave', () => {
+      const line = document.querySelector(`#s5 .s5-lines [data-id="${node.dataset.id}"]`);
+      if (line) line.classList.remove('s5-line-hover');
+    });
+  });
 }
 
 function advanceS5() {
   if (s5Step < S5_NODES) {
     const nodes = document.querySelectorAll('#s5 .s5-node');
     const lines = document.querySelectorAll('#s5 .s5-line');
-    nodes[s5Step].classList.add('on');
-    lines[s5Step].classList.add('on');
+    const revealIdx = s5Step;
+    nodes[revealIdx].classList.add('on');
+    lines[revealIdx].classList.add('on');
     s5Step++;
-    if (s5Step === S5_NODES) {
-      setTimeout(() => document.getElementById('s5-pull').classList.add('on'), 200);
+    // People is node[0] — highlight immediately when first revealed
+    if (revealIdx === 0) {
+      nodes[0].classList.add('active');
+      lines[0].classList.add('s5-line-active');
     }
+    if (s5Step === S5_NODES) {
+      setTimeout(() => {
+        document.getElementById('s5-pull').classList.add('on');
+        document.getElementById('s5-hint').classList.add('on');
+        document.getElementById('s5').classList.add('s5-interactive');
+        initS5Hover();
+        const people = document.querySelector('#s5 .s5-node.people');
+        if (people) people.classList.add('active');
+        const pLine = document.querySelector('#s5 .s5-lines [data-id="people"]');
+        if (pLine) pLine.classList.add('s5-line-active');
+      }, 200);
+    }
+  } else if (!s5Shifted) {
+    shiftS5();
   } else {
-    const el = document.getElementById('s5');
-    el.classList.add('s5-exit');
-    setTimeout(() => { go(cur + 1); }, 240);
+    go(cur + 1);
+  }
+}
+
+// ── SLIDE 5b: BUILD SEQUENCE ──
+const S5B_IDX = 5;
+let s5bStep = -1;
+const S5B_TOTAL = 9;
+
+const s5bContent = [
+  { name: 'System Prompt',  text: 'Sets the tone, style and boundaries for how the proposal should read.' },
+  { name: 'Memory',         text: 'Pulls in your history with this account — past conversations, what they care about.' },
+  { name: 'Documents',      text: 'Retrieves relevant case studies, capability docs and anything that supports the pitch.' },
+  { name: 'Tools',          text: 'Checks live pricing, looks up the account record, runs any calculations it needs.' },
+  { name: 'LLM',            text: 'Writes the first version of the proposal using everything it has been given.' },
+  { name: 'Guardrails',     text: 'Reviews the draft for overcommitments, unsupported claims or anything off-brand.' },
+  { name: 'People',         text: 'The account manager reads it, makes changes, and decides whether it goes out.' },
+  { name: 'Integrations',   text: 'Saves the approved draft back to the CRM and document storage.' },
+  { name: 'Evals',          text: 'Tracks whether it worked — did the deal progress, and how much did the draft need changing?' },
+];
+
+function resetS5b() {
+  s5bStep = -1;
+  document.querySelectorAll('#s5b .s5b-node').forEach(n => n.classList.remove('s5b-active','s5b-done'));
+  document.querySelectorAll('#s5b .s5b-conn').forEach(c => c.classList.remove('on'));
+  const card = document.getElementById('s5b-card');
+  if (card) card.classList.remove('on');
+  const btn = document.getElementById('s5b-trigger');
+  if (btn) btn.classList.remove('triggered');
+  ['s5b-caption','s5b-outcome'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('on');
+  });
+}
+
+function startS5b() {
+  if (s5bStep >= 0) return;
+  document.getElementById('s5b-trigger').classList.add('triggered');
+  setTimeout(advanceS5b, 150);
+}
+
+function updateS5bCard(idx) {
+  const content = s5bContent[idx];
+  const card = document.getElementById('s5b-card');
+  const nameEl = document.getElementById('s5b-card-name');
+  const textEl = document.getElementById('s5b-card-text');
+  const nodes = document.querySelectorAll('#s5b .s5b-node');
+  const flowRel = document.querySelector('#s5b .s5b-row');
+  nameEl.textContent = content.name.toUpperCase();
+  textEl.textContent = content.text;
+  const nRect = nodes[idx].getBoundingClientRect();
+  const fRect = flowRel.getBoundingClientRect();
+  const cx = nRect.left - fRect.left + nRect.width / 2;
+  const clamped = Math.max(100, Math.min(fRect.width - 100, cx));
+  card.style.left = clamped + 'px';
+  card.classList.add('on');
+}
+
+function advanceS5b() {
+  const nodes = document.querySelectorAll('#s5b .s5b-node');
+  const conns = document.querySelectorAll('#s5b .s5b-conn');
+
+  // Previous active → done
+  if (s5bStep >= 0 && s5bStep < S5B_TOTAL) {
+    nodes[s5bStep].classList.remove('s5b-active');
+    nodes[s5bStep].classList.add('s5b-done');
+  }
+
+  s5bStep++;
+
+  if (s5bStep >= S5B_TOTAL) {
+    document.getElementById('s5b-card').classList.remove('on');
+    document.getElementById('s5b-caption').classList.add('on');
+    document.getElementById('s5b-outcome').classList.add('on');
+    return;
+  }
+
+  // Fade card out, draw connector, activate node
+  document.getElementById('s5b-card').classList.remove('on');
+
+  const activate = () => {
+    nodes[s5bStep].classList.add('s5b-active');
+    updateS5bCard(s5bStep);
+  };
+
+  if (s5bStep > 0) {
+    conns[s5bStep - 1].classList.add('on');
+    setTimeout(activate, 320);
+  } else {
+    activate();
   }
 }
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (cur === S5_IDX && s5Shifted && s5ActivePanel !== 'people') {
+      e.preventDefault(); closeS5Panel();
+    }
+    return;
+  }
   if (['ArrowRight','ArrowDown',' '].includes(e.key)) {
     e.preventDefault();
-    if (cur === S5_IDX) advanceS5(); else go(cur+1);
+    if (cur === S5_IDX) advanceS5();
+    else if (cur === S5B_IDX) { if (s5bStep >= 0) advanceS5b(); }
+    else go(cur+1);
   }
   if (['ArrowLeft','ArrowUp'].includes(e.key)) { e.preventDefault(); go(cur-1); }
 });
 document.addEventListener('click', e => {
-  if (!e.target.closest('.dot')) {
-    if (cur === S5_IDX) advanceS5(); else go(cur + 1);
+  if (e.target.closest('.dot')) return;
+  if (cur === S5B_IDX) {
+    if (e.target.closest('#s5b-trigger')) return;
+    if (s5bStep < 0) return;
+    advanceS5b();
+    return;
+  }
+  if (cur !== S5_IDX) { go(cur + 1); return; }
+  if (e.target.closest('#s5-right')) return; // click inside panel: do nothing
+  const nodeEl = e.target.closest('#s5 .s5-node');
+  if (s5Shifted) {
+    if (nodeEl) {
+      openS5Panel(nodeEl.dataset.id); // switch panel to clicked node
+    } else {
+      go(cur + 1); // click outside nodes/panel: advance
+    }
+  } else {
+    advanceS5(); // pre-shift: any click advances build or triggers shift
   }
 });
 
