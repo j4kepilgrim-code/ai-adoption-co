@@ -790,42 +790,36 @@ body {
 }
 .srb-strip.on { opacity: 1; }
 
-/* ── READINESS C: SCORECARD (offers-page pattern) ── */
-#src { padding: 48px 80px; gap: 0; }
-.src-cards { flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 14px; align-items: start; }
-/* Card shell */
-.src-card { background: #fff; border: 1px solid; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.18s, box-shadow 0.18s; cursor: default; }
-.src-card.risk  { border-color: #fde68a; box-shadow: 6px 6px 0 #fde68a; }
-.src-card.adopt { border-color: #bfdbfe; box-shadow: 6px 6px 0 #bfdbfe; }
-.src-card.cost  { border-color: #e2e8f0; box-shadow: 6px 6px 0 #e2e8f0; }
-/* Card header: centered, icon + label + sub */
-.src-card-header { padding: 22px 18px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.src-card-icon { width: 38px; height: 38px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+/* ── READINESS C: SCORECARD ── */
+#src { padding: 48px 80px 36px; gap: 0; }
+[data-cat="risk"]  { --sc: #93c5fd; }
+[data-cat="adopt"] { --sc: #2563eb; }
+[data-cat="cost"]  { --sc: #1e3a8a; }
+.src-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 14px; }
+.src-card { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 24px 18px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; user-select: none; box-shadow: 6px 6px 0 var(--sc); transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s; }
+.src-card:hover { border-color: var(--sc); transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--sc); }
+.src-card.active { border-color: var(--sc); transform: translate(-2px,-2px); box-shadow: 0 0 0 3px rgba(59,130,246,0.1), 8px 8px 0 var(--sc); }
+.src-card-icon { width: 40px; height: 40px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: var(--sc); }
 .src-card-icon svg { width: 100%; height: 100%; }
-.src-card.risk  .src-card-icon { color: #d97706; }
-.src-card.adopt .src-card-icon { color: var(--b4); }
-.src-card.cost  .src-card-icon { color: #64748b; }
-.src-card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px; }
-.src-card.risk  .src-card-label { color: #d97706; }
-.src-card.adopt .src-card-label { color: var(--b4); }
-.src-card.cost  .src-card-label { color: #64748b; }
-.src-card-sub { font-size: 11px; font-weight: 300; font-style: italic; color: var(--muted); }
-/* Items: expand downward */
-.src-items { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
-.src-items.on { max-height: 380px; border-top: 1px solid #f0f2f4; }
-.src-item { display: flex; align-items: flex-start; gap: 9px; padding: 9px 14px; border-bottom: 1px solid #f5f6f8; }
-.src-item:last-child { border-bottom: none; }
-.src-item-icon { flex-shrink: 0; color: #c8cdd6; margin-top: 1px; }
-.src-item-name { font-size: 12px; font-weight: 500; color: var(--near-blk); margin-bottom: 1px; }
-.src-item-desc { font-size: 10.5px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.5; }
-/* Footer lines */
-.src-ownership { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 300; color: var(--warm); opacity: 0; transition: opacity 0.35s ease; }
-.src-ownership.on { opacity: 1; }
-.src-closing { margin-top: 8px; font-size: 13px; font-weight: 500; letter-spacing: -0.01em; color: var(--near-blk); opacity: 0; transition: opacity 0.35s ease; }
-.src-closing.on { opacity: 1; }
+.src-card-label { font-size: 14px; font-weight: 600; letter-spacing: -0.015em; color: var(--near-blk); }
+/* Expand panel */
+.src-expand { display: none; margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); }
+.src-expand.visible { display: block; animation: srcPanelDown 0.24s ease; }
+@keyframes srcPanelDown { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.src-expand-header { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.src-expand-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.src-expand-icon svg { width: 100%; height: 100%; }
+.src-expand-title { font-size: 11.5px; font-weight: 300; font-style: italic; color: var(--warm); }
+.src-exp-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0f2f4; }
+.src-exp-item:last-child { border-bottom: none; }
+.src-exp-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.src-exp-name { font-size: 12.5px; font-weight: 500; color: var(--near-blk); margin-bottom: 2px; }
+.src-exp-desc { font-size: 10.5px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.5; }
+/* Footer */
+.src-closing { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 500; letter-spacing: -0.01em; color: var(--near-blk); }
 
 /* ── SR1: LEVELS (ported from capableai.io/levels) ── */
-#sr1 { padding: 36px 64px 36px 80px; gap: 0; }
+#sr1 { padding: 0; gap: 0; }
 #sr1 [data-level="0"] { --lc: #93c5fd; }
 #sr1 [data-level="1"] { --lc: #60a5fa; }
 #sr1 [data-level="2"] { --lc: #3b82f6; }
@@ -833,22 +827,22 @@ body {
 #sr1 [data-level="4"] { --lc: #1d4ed8; }
 #sr1 [data-level="5"] { --lc: #1e3a8a; }
 @keyframes sr1PanelIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-#sr1 .levels-outer { display: grid; grid-template-columns: 260px 1fr; flex: 1; border: 1px solid #e8edf2; border-radius: 3px; overflow: hidden; min-height: 0; }
-#sr1 .levels-left { padding: 20px 18px; border-right: 1px solid #e8edf2; display: flex; flex-direction: column; gap: 7px; background: #fff; }
-#sr1 .levels-eyebrow { font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: #5a5248; font-weight: 500; margin-bottom: 8px; font-family: var(--mono); }
-#sr1 .level-block { background: #fff; border: 1px solid #e2e8f0; border-radius: 3px; padding: 11px 14px; display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; box-shadow: 5px 5px 0 var(--lc); transition: transform 0.18s, box-shadow 0.18s, background 0.2s, border-color 0.18s; }
-#sr1 .level-block:hover { border-color: var(--lc); transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--lc); }
-#sr1 .level-block.active { background: var(--lc); border-color: transparent; transform: translate(-2px,-2px); box-shadow: 7px 7px 0 rgba(0,0,0,0.15); }
-#sr1 .lb-num { font-size: 20px; font-weight: 600; letter-spacing: -0.04em; color: var(--lc); min-width: 26px; line-height: 1; transition: color 0.2s; }
+#sr1 .levels-outer { display: grid; grid-template-columns: 280px 1fr; flex: 1; width: 78%; max-width: 1000px; margin: 0 auto; }
+#sr1 .levels-left { padding: 40px 28px 40px 28px; border-right: 1px solid #e8edf2; display: flex; flex-direction: column; gap: 7px; }
+#sr1 .levels-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: #5a5248; font-weight: 500; margin-bottom: 20px; font-family: var(--mono); }
+#sr1 .level-block { background: #fff; border: 1px solid #e2e8f0; border-radius: 3px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; cursor: pointer; user-select: none; box-shadow: 6px 6px 0 var(--lc); transition: transform 0.18s, box-shadow 0.18s, background 0.2s, border-color 0.18s; }
+#sr1 .level-block:hover { border-color: var(--lc); transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--lc); }
+#sr1 .level-block.active { background: var(--lc); border-color: transparent; transform: translate(-2px,-2px); box-shadow: 8px 8px 0 rgba(0,0,0,0.18); }
+#sr1 .lb-num { font-size: 26px; font-weight: 600; letter-spacing: -0.04em; color: var(--lc); min-width: 32px; line-height: 1; transition: color 0.2s; }
 #sr1 .level-block.active .lb-num { color: rgba(255,255,255,0.65); }
-#sr1 .lb-name { font-size: 13.5px; font-weight: 600; letter-spacing: -0.015em; color: #0f0e0c; transition: color 0.2s; }
+#sr1 .lb-name { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; color: #0f0e0c; transition: color 0.2s; }
 #sr1 .level-block.active .lb-name { color: #fff; }
-#sr1 .levels-right { display: flex; align-items: center; justify-content: center; padding: 28px; background: #fff; }
+#sr1 .levels-right { display: flex; align-items: center; justify-content: center; padding: 56px; }
 #sr1 .panel-idle { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: opacity 0.2s; }
 #sr1 .panel-idle-arrow { font-size: 18px; color: #9a9080; display: inline-block; }
 #sr1 .panel-idle-text { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9080; font-family: var(--mono); }
 #sr1 .panel-idle.hidden { opacity: 0; pointer-events: none; }
-#sr1 .level-panel { display: none; width: 100%; max-width: 360px; }
+#sr1 .level-panel { display: none; width: 100%; max-width: 420px; }
 #sr1 .level-panel.visible { display: block; animation: sr1PanelIn 0.28s ease; }
 #sr1 .panel-inner { background: #f5f7fa; border: 1px solid #e8edf2; border-radius: 6px; padding: 28px 24px 22px; text-align: center; }
 #sr1 .panel-icon { width: 44px; height: 44px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
@@ -879,20 +873,30 @@ body {
 .sr2-strip.on { opacity: 1; }
 
 /* ── SR3: TRAINING MODULE ── */
-#sr3 { gap: 0; }
-.sr3-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; margin-top: 12px; }
-.sr3-panel {
-  padding: 18px 20px; border: 1px solid var(--line); border-radius: 3px; background: #fff;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+#sr3 { padding: 56px 64px 40px; }
+.sr3-cards-row { display: flex; gap: 14px; margin-bottom: 0; }
+.sr3-card {
+  flex: 1; padding: 22px 16px 18px; border: 1px solid var(--line); border-radius: 6px;
+  background: #fff; cursor: pointer;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.18s;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
 }
-.sr3-panel.on { opacity: 1; transform: translateY(0); }
-.sr3-panel-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-.sr3-stage { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--b4); }
-.sr3-dur { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-left: auto; }
-.sr3-body { font-size: 12.5px; font-weight: 300; color: var(--warm); line-height: 1.65; }
-.sr3-closing { margin-top: 14px; font-size: 13px; font-weight: 300; color: var(--near-blk); opacity: 0; transition: opacity 0.35s ease; }
-.sr3-closing.on { opacity: 1; }
+.sr3-card:hover { border-color: var(--b2); transform: translateY(-2px); }
+.sr3-card.active { border-color: var(--b4); box-shadow: 0 0 0 3px rgba(37,99,235,0.10); }
+.sr3-card-icon { width: 38px; height: 38px; color: var(--b2); transition: color 0.2s; }
+.sr3-card.active .sr3-card-icon { color: var(--b4); }
+.sr3-card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--b4); }
+.sr3-card-dur { font-family: var(--mono); font-size: 9px; color: var(--muted); }
+.sr3-detail-strip {
+  margin-top: 14px; border: 1px solid var(--b1); border-radius: 6px; background: var(--b0);
+  font-size: 13px; font-weight: 300; color: var(--warm); line-height: 1.7;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.38s ease, opacity 0.3s ease, padding 0.3s ease;
+  padding: 0 28px;
+}
+.sr3-detail-strip.on { max-height: 120px; opacity: 1; padding: 22px 28px; }
+.sr3-closing-row { margin-top: 14px; font-size: 12px; font-weight: 300; color: var(--muted); opacity: 0; transition: opacity 0.35s ease; }
+.sr3-closing-row.on { opacity: 1; }
 
 /* ── SR4: INCLUSION TURN ── */
 /* uses .slide.ink — no extra CSS needed */
@@ -1121,8 +1125,7 @@ body {
 
 <!-- ══ SRB: RFP WORKFLOW ══ -->
 <div class="slide grid" id="srb">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>Where policy meets practice</div>
-  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0">An RFP goes out the door.</h2>
+  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0">Worked example: an RFP, end to end.</h2>
   <div class="srb-flow-wrap">
     <div class="srb-flow-body">
       <div class="srb-node-col">
@@ -1153,102 +1156,31 @@ body {
   <div class="eyebrow"><span class="eyebrow-dot"></span>The readiness scorecard</div>
   <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:0">What "ready" actually looks like.</h2>
   <div class="src-cards">
-    <div class="src-card risk">
-      <div class="src-card-header">
-        <div class="src-card-icon"><svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="0.8" fill="currentColor"/></svg></div>
-        <div class="src-card-label">Risk</div>
-        <div class="src-card-sub">contain the blast radius</div>
-      </div>
-      <div class="src-items" id="src-risk-items">
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg></div>
-          <div><div class="src-item-name">Policy tested</div><div class="src-item-desc">Stress-tested against real workflows, not generic compliance copy</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-          <div><div class="src-item-name">Checkpoints at the door</div><div class="src-item-desc">Human review before AI output reaches anyone outside the org</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-          <div><div class="src-item-name">Sanctioned tools list</div><div class="src-item-desc">What's allowed, what's not, how to request new</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-          <div><div class="src-item-name">Provenance tracking</div><div class="src-item-desc">Know what was AI-drafted versus human-written</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-          <div><div class="src-item-name">Audit trail</div><div class="src-item-desc">Logging of high-stakes use, defensible if challenged</div></div>
-        </div>
-      </div>
+    <div class="src-card" data-cat="risk" onclick="srcSelect('risk')">
+      <div class="src-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="0.8" fill="currentColor"/></svg></div>
+      <div class="src-card-label">Risk</div>
     </div>
-    <div class="src-card adopt">
-      <div class="src-card-header">
-        <div class="src-card-icon"><svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="src-card-label">Adoption</div>
-        <div class="src-card-sub">drive the value uptake</div>
-      </div>
-      <div class="src-items" id="src-adopt-items">
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div><div class="src-item-name">Comms in context</div><div class="src-item-desc">Clear language, role-relevant, repeated where the work happens</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <div><div class="src-item-name">Training delivered</div><div class="src-item-desc">Baseline for everyone, depth for champions</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div><div class="src-item-name">Right champions</div><div class="src-item-desc">Selected on capability and judgment, not who shouted loudest</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
-          <div><div class="src-item-name">Reinforcement loop</div><div class="src-item-desc">Recurring touchpoints, not a single launch event</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-          <div><div class="src-item-name">Workflow integration</div><div class="src-item-desc">AI lives inside the systems people already use</div></div>
-        </div>
-      </div>
+    <div class="src-card" data-cat="adopt" onclick="srcSelect('adopt')">
+      <div class="src-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="src-card-label">Adoption</div>
     </div>
-    <div class="src-card cost">
-      <div class="src-card-header">
-        <div class="src-card-icon"><svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="src-card-label">Cost</div>
-        <div class="src-card-sub">control the spend curve</div>
-      </div>
-      <div class="src-items" id="src-cost-items">
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-          <div><div class="src-item-name">Licence caps</div><div class="src-item-desc">Sized to actual need, not handed out by default</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <div><div class="src-item-name">Usage visibility</div><div class="src-item-desc">See who's using what, how often, for what</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-          <div><div class="src-item-name">Spend monitoring</div><div class="src-item-desc">Token and usage costs tracked alongside seat costs</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
-          <div><div class="src-item-name">ROI baselines</div><div class="src-item-desc">Measurement framework defined before rollout, not after</div></div>
-        </div>
-        <div class="src-item">
-          <div class="src-item-icon"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-          <div><div class="src-item-name">Tool consolidation</div><div class="src-item-desc">Fewer tools, deeper integration, less duplicated spend</div></div>
-        </div>
-      </div>
+    <div class="src-card" data-cat="cost" onclick="srcSelect('cost')">
+      <div class="src-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="src-card-label">Cost</div>
     </div>
   </div>
-  <div class="src-ownership" id="src-ownership">And someone owns this. Named, accountable, visible — at the executive table.</div>
-  <div class="src-closing" id="src-closing">Without this in place, you're not handing over keys. You're handing out matches.</div>
+  <div class="src-expand" id="src-expand">
+    <div class="src-expand-header">
+      <div class="src-expand-icon" id="src-exp-icon"></div>
+      <div class="src-expand-title" id="src-exp-title"></div>
+    </div>
+    <div id="src-exp-items"></div>
+  </div>
+  <div class="src-closing">Without this in place, you're not handing over keys. You're handing out matches.</div>
 </div>
 
 <!-- ══ SR1: THE LEVELS ══ -->
 <div class="slide grid" id="sr1">
-  <div class="eyebrow" style="margin-bottom:8px;"><span class="eyebrow-dot"></span>Section · Rollout</div>
-  <h2 class="h1" style="font-size:clamp(1.6rem,2.8vw,2.2rem);margin-bottom:12px">Six levels, and most orgs cluster at two.</h2>
   <div class="levels-outer">
     <div class="levels-left">
       <div class="levels-eyebrow">AI Maturity · 0 → 5</div>
@@ -1261,7 +1193,7 @@ body {
     </div>
     <div class="levels-right">
       <div class="panel-idle" id="sr1-idle">
-        <span class="panel-idle-arrow">←</span>
+        <span class="panel-idle-arrow">→</span>
         <span class="panel-idle-text">Select a level</span>
       </div>
       <div class="level-panel" id="sr1-panel">
@@ -1320,40 +1252,54 @@ body {
 
 <!-- ══ SR3: TRAINING MODULE ══ -->
 <div class="slide grid" id="sr3">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>Inside the room · Basic Training</div>
-  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:4px">What happens in the Context module.</h2>
-  <p style="font-size:13px;font-weight:300;color:var(--muted);margin-bottom:0">Module 1 of Basic Training. 90 minutes. Takes everyone from Passenger to Driver.</p>
-  <div class="sr3-grid">
-    <div class="sr3-panel" id="sr3-p1">
-      <div class="sr3-panel-head">
-        <div class="sr3-stage">Explain</div>
-        <div class="sr3-dur">~20 min</div>
-      </div>
-      <div class="sr3-body">What LLMs actually are — stateless, probabilistic, and blind to your business until you give them context. The three levers: instructions, reference material, and persistent state. A walkthrough of the product features that bundle these together.</div>
+  <div class="eyebrow"><span class="eyebrow-dot"></span>Rollout · Basic Training</div>
+  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:6px">Our approach to training.</h2>
+  <p style="font-size:13px;font-weight:300;color:var(--muted);margin-bottom:22px">Hands-on and lab style. Click any stage to see what happens.</p>
+  <div class="sr3-cards-row">
+    <div class="sr3-card" id="sr3-c1" onclick="sr3Select(0)">
+      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="6" width="30" height="28" rx="2"/>
+        <line x1="11" y1="15" x2="29" y2="15"/>
+        <line x1="11" y1="21" x2="29" y2="21"/>
+        <line x1="11" y1="27" x2="22" y2="27"/>
+      </svg>
+      <div class="sr3-card-label">Explain</div>
+      <div class="sr3-card-dur">~20 min</div>
     </div>
-    <div class="sr3-panel" id="sr3-p2">
-      <div class="sr3-panel-head">
-        <div class="sr3-stage">Exercise</div>
-        <div class="sr3-dur">~30 min</div>
-      </div>
-      <div class="sr3-body">Each participant picks a real task from their actual role, builds their own Project or Custom GPT with custom instructions and reference documents, runs real inputs through it, and compares the output to the same task done without any context setup.</div>
+    <div class="sr3-card" id="sr3-c2" onclick="sr3Select(1)">
+      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="20" cy="20" r="13"/>
+        <polyline points="14,20 18,24 26,16"/>
+      </svg>
+      <div class="sr3-card-label">Exercise</div>
+      <div class="sr3-card-dur">~30 min</div>
     </div>
-    <div class="sr3-panel" id="sr3-p3">
-      <div class="sr3-panel-head">
-        <div class="sr3-stage">Group</div>
-        <div class="sr3-dur">~20 min</div>
-      </div>
-      <div class="sr3-body">Small groups share what they built and what worked. They discuss where context made the biggest difference, surface who's already doing this informally, and identify which team workflows could benefit from the same approach.</div>
+    <div class="sr3-card" id="sr3-c3" onclick="sr3Select(2)">
+      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="20" cy="13" r="5"/>
+        <path d="M10 34 Q10 26 20 26 Q30 26 30 34"/>
+        <circle cx="9" cy="15" r="3.5"/>
+        <path d="M3 34 Q3 28 9 28"/>
+        <circle cx="31" cy="15" r="3.5"/>
+        <path d="M37 34 Q37 28 31 28"/>
+      </svg>
+      <div class="sr3-card-label">Group</div>
+      <div class="sr3-card-dur">~20 min</div>
     </div>
-    <div class="sr3-panel" id="sr3-p4">
-      <div class="sr3-panel-head">
-        <div class="sr3-stage">Share</div>
-        <div class="sr3-dur">~20 min</div>
-      </div>
-      <div class="sr3-body">Each group nominates one standout example to share back. The facilitator surfaces common patterns, maps the work back to the architectural components, and previews what Advanced Training would add.</div>
+    <div class="sr3-card" id="sr3-c4" onclick="sr3Select(3)">
+      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="30" cy="10" r="4"/>
+        <circle cx="10" cy="20" r="4"/>
+        <circle cx="30" cy="30" r="4"/>
+        <line x1="14" y1="18" x2="26" y2="12"/>
+        <line x1="14" y1="22" x2="26" y2="28"/>
+      </svg>
+      <div class="sr3-card-label">Share</div>
+      <div class="sr3-card-dur">~20 min</div>
     </div>
   </div>
-  <div class="sr3-closing" id="sr3-closing">The training is hands-on and every participant builds something real. By the wrap, everyone has moved a level.</div>
+  <div class="sr3-detail-strip" id="sr3-strip"></div>
+  <div class="sr3-closing-row" id="sr3-closing">Incorporates solo work and group activity to give everyone a voice. Performed with Capable AI's tasks and your model of choice — we recommend business accounts.</div>
 </div>
 
 <!-- ══ SR4: INCLUSION TURN ══ -->
@@ -1661,24 +1607,45 @@ function reverseSR2() {
 // ── SR3: TRAINING MODULE ──
 const SR3_IDX = 12;
 let sr3Step = 0;
+let sr3ActiveCard = -1;
+const sr3Details = [
+  "What LLMs actually are — stateless, probabilistic, and blind to your business until you give them context. The three levers: instructions, reference material, and persistent state. A walkthrough of the product features that bundle these together.",
+  "Each participant picks a real task from their actual role and builds their own Project or Custom GPT with custom instructions and reference material. They run real inputs through it and compare the output to the same task done without any context setup.",
+  "Small groups share what they built and what worked. They discuss where context made the biggest difference, surface who's already doing this informally, and identify which team workflows could benefit from the same approach.",
+  "Each group nominates one standout example to share back. The facilitator surfaces common patterns, maps the work back to the architectural components, and previews what Advanced Training would add."
+];
 function resetSR3() {
-  sr3Step = 0;
-  ['sr3-p1','sr3-p2','sr3-p3','sr3-p4','sr3-closing'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('on');
-  });
+  sr3Step = 0; sr3ActiveCard = -1;
+  [1,2,3,4].forEach(i => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.remove('active'); });
+  const strip = document.getElementById('sr3-strip');
+  if (strip) { strip.classList.remove('on'); strip.textContent = ''; }
+  const closing = document.getElementById('sr3-closing');
+  if (closing) closing.classList.remove('on');
+}
+function sr3Select(idx) {
+  [1,2,3,4].forEach((i,j) => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.toggle('active', j === idx); });
+  const strip = document.getElementById('sr3-strip');
+  strip.textContent = sr3Details[idx];
+  strip.classList.add('on');
+  sr3ActiveCard = idx;
+  if (sr3Step <= idx) sr3Step = idx + 1;
 }
 function advanceSR3() {
-  const seq = ['sr3-p1','sr3-p2','sr3-p3','sr3-p4','sr3-closing'];
-  if (sr3Step >= seq.length) { go(cur + 1); return; }
-  document.getElementById(seq[sr3Step]).classList.add('on');
-  sr3Step++;
+  if (sr3Step < 4) { sr3Select(sr3Step); return; }
+  if (sr3Step === 4) { document.getElementById('sr3-closing').classList.add('on'); sr3Step++; return; }
+  go(cur + 1);
 }
 function reverseSR3() {
-  const seq = ['sr3-p1','sr3-p2','sr3-p3','sr3-p4','sr3-closing'];
-  if (sr3Step > 0) {
+  if (sr3Step > 4) {
+    document.getElementById('sr3-closing').classList.remove('on'); sr3Step--;
+  } else if (sr3Step > 1) {
     sr3Step--;
-    document.getElementById(seq[sr3Step]).classList.remove('on');
+    sr3Select(sr3Step - 1);
+  } else if (sr3Step === 1) {
+    sr3Step = 0; sr3ActiveCard = -1;
+    [1,2,3,4].forEach(i => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.remove('active'); });
+    const strip = document.getElementById('sr3-strip');
+    strip.classList.remove('on');
   } else {
     go(cur - 1);
   }
@@ -1789,30 +1756,71 @@ function reverseSlideB() {
 
 // ── READINESS C: SCORECARD ──
 const SLIDEC_IDX = 9;
-let slideCStep = 0;
-
-function resetSlideC() {
-  slideCStep = 0;
-  ['src-risk-items','src-adopt-items','src-cost-items','src-ownership','src-closing'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('on');
-  });
-}
-function advanceSlideC() {
-  const seq = ['src-risk-items','src-adopt-items','src-cost-items','src-ownership','src-closing'];
-  if (slideCStep >= seq.length) { go(cur + 1); return; }
-  document.getElementById(seq[slideCStep]).classList.add('on');
-  slideCStep++;
-}
-function reverseSlideC() {
-  const seq = ['src-risk-items','src-adopt-items','src-cost-items','src-ownership','src-closing'];
-  if (slideCStep > 0) {
-    slideCStep--;
-    document.getElementById(seq[slideCStep]).classList.remove('on');
-  } else {
-    go(cur - 1);
+let srcActive = null;
+const srcData = {
+  risk: { lc: '#93c5fd', sub: 'contain the blast radius',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="0.8" fill="currentColor"/></svg>',
+    items: [
+      { name: 'Policy tested',           desc: 'Stress-tested against real workflows, not generic compliance copy' },
+      { name: 'Checkpoints at the door', desc: 'Human review before AI output reaches anyone outside the org' },
+      { name: 'Sanctioned tools list',   desc: "What's allowed, what's not, how to request new" },
+      { name: 'Provenance tracking',     desc: 'Know what was AI-drafted versus human-written' },
+      { name: 'Audit trail',             desc: 'Logging of high-stakes use, defensible if challenged' }
+    ]
+  },
+  adopt: { lc: '#2563eb', sub: 'drive the value uptake',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    items: [
+      { name: 'Comms in context',      desc: 'Clear language, role-relevant, repeated where the work happens' },
+      { name: 'Training delivered',    desc: 'Baseline for everyone, depth for champions' },
+      { name: 'Right champions',       desc: 'Selected on capability and judgment, not who shouted loudest' },
+      { name: 'Reinforcement loop',    desc: 'Recurring touchpoints, not a single launch event' },
+      { name: 'Workflow integration',  desc: 'AI lives inside the systems people already use' }
+    ]
+  },
+  cost: { lc: '#1e3a8a', sub: 'control the spend curve',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+    items: [
+      { name: 'Licence caps',       desc: 'Sized to actual need, not handed out by default' },
+      { name: 'Usage visibility',   desc: "See who's using what, how often, for what" },
+      { name: 'Spend monitoring',   desc: 'Token and usage costs tracked alongside seat costs' },
+      { name: 'ROI baselines',      desc: 'Measurement framework defined before rollout, not after' },
+      { name: 'Tool consolidation', desc: 'Fewer tools, deeper integration, less duplicated spend' }
+    ]
   }
+};
+function srcSelect(cat) {
+  const panel = document.getElementById('src-expand');
+  if (srcActive === cat) {
+    document.querySelector('#src [data-cat="' + cat + '"]').classList.remove('active');
+    panel.classList.remove('visible');
+    srcActive = null;
+    return;
+  }
+  document.querySelectorAll('#src .src-card').forEach(c => c.classList.remove('active'));
+  document.querySelector('#src [data-cat="' + cat + '"]').classList.add('active');
+  srcActive = cat;
+  const d = srcData[cat];
+  const iconEl = document.getElementById('src-exp-icon');
+  iconEl.innerHTML = d.icon;
+  iconEl.style.color = d.lc;
+  document.getElementById('src-exp-title').textContent = d.sub;
+  document.getElementById('src-exp-items').innerHTML = d.items.map(item =>
+    '<div class="src-exp-item">' +
+    '<div class="src-exp-dot" style="background:' + d.lc + '"></div>' +
+    '<div><div class="src-exp-name">' + item.name + '</div><div class="src-exp-desc">' + item.desc + '</div></div>' +
+    '</div>'
+  ).join('');
+  panel.classList.remove('visible');
+  requestAnimationFrame(() => panel.classList.add('visible'));
 }
+function resetSlideC() {
+  srcActive = null;
+  document.querySelectorAll('#src .src-card').forEach(c => c.classList.remove('active'));
+  const p = document.getElementById('src-expand'); if (p) p.classList.remove('visible');
+}
+function advanceSlideC() { go(cur + 1); }
+function reverseSlideC() { go(cur - 1); }
 
 // ── SLIDE TABLE: AI-NATIVE PLAYBOOK ──
 // Build order: 0→1 reveal all left; 1→6 reveal rights one by one; 6→7 CTA; 7+ advance
@@ -2063,14 +2071,14 @@ document.addEventListener('click', e => {
   }
   if (cur === STABLE_IDX) { advanceSTable(); return; }
   if (cur === SLIDEB_IDX) { advanceSlideB(); return; }
-  if (cur === SLIDEC_IDX) { advanceSlideC(); return; }
+  if (cur === SLIDEC_IDX) { if (e.target.closest('#src .src-card')) return; advanceSlideC(); return; }
   if (cur === SR1_IDX) {
     if (e.target.closest('#sr1 .level-block')) return;
     if (e.target.closest('#sr1 .levels-right')) return;
     go(cur + 1); return;
   }
   if (cur === SR2_IDX) { advanceSR2(); return; }
-  if (cur === SR3_IDX) { advanceSR3(); return; }
+  if (cur === SR3_IDX) { if (e.target.closest('.sr3-card')) return; advanceSR3(); return; }
   if (cur !== S5_IDX) { go(cur + 1); return; }
   if (e.target.closest('#s5-right')) return; // click inside panel: do nothing
   const nodeEl = e.target.closest('#s5 .s5-node');
