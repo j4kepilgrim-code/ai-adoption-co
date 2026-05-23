@@ -929,30 +929,27 @@ body {
 .sr2-strip.on { opacity: 1; }
 
 /* ── SR3: TRAINING MODULE ── */
-#sr3 { padding: 56px 64px 40px; }
-.sr3-cards-row { display: flex; gap: 14px; margin-bottom: 0; }
-.sr3-card {
-  flex: 1; padding: 22px 16px 18px; border: 1px solid var(--line); border-radius: 6px;
-  background: #fff; cursor: pointer;
-  transition: border-color 0.22s, box-shadow 0.22s, transform 0.18s;
-  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
-}
-.sr3-card:hover { border-color: var(--b2); transform: translateY(-2px); }
-.sr3-card.active { border-color: var(--b4); box-shadow: 0 0 0 3px rgba(37,99,235,0.10); }
-.sr3-card-icon { width: 38px; height: 38px; color: var(--b2); transition: color 0.2s; }
-.sr3-card.active .sr3-card-icon { color: var(--b4); }
-.sr3-card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--b4); }
-.sr3-card-dur { font-family: var(--mono); font-size: 9px; color: var(--muted); }
-.sr3-detail-strip {
-  margin-top: 14px; border: 1px solid var(--b1); border-radius: 6px; background: var(--b0);
-  font-size: 13px; font-weight: 300; color: var(--warm); line-height: 1.7;
-  max-height: 0; overflow: hidden; opacity: 0;
-  transition: max-height 0.38s ease, opacity 0.3s ease, padding 0.3s ease;
-  padding: 0 28px;
-}
-.sr3-detail-strip.on { max-height: 120px; opacity: 1; padding: 22px 28px; }
-.sr3-closing-row { margin-top: 14px; font-size: 12px; font-weight: 300; color: var(--muted); opacity: 0; transition: opacity 0.35s ease; }
-.sr3-closing-row.on { opacity: 1; }
+#sr3 { padding: 48px 64px 40px; display: flex; flex-direction: column; }
+.sr3-example { font-size: 11px; font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 32px; }
+.sr3-center { flex: 1; display: flex; justify-content: center; padding-top: 8px; }
+.sr3-timeline { width: 520px; border-bottom: 1px solid var(--line); }
+.sr3-row { border-top: 1px solid var(--line); }
+.sr3-stage-row { display: flex; align-items: center; gap: 14px; padding: 14px 0; cursor: pointer; user-select: none; }
+.sr3-stage-row:hover .sr3-stage-name { color: var(--b3); }
+.sr3-stage-row:hover .sr3-stage-icon { color: var(--b2); }
+.sr3-row.active .sr3-stage-name { color: var(--b4); }
+.sr3-row.active .sr3-stage-icon { color: var(--b4); }
+.sr3-row.active .sr3-stage-num { color: var(--b3); }
+.sr3-stage-num { font-family: var(--mono); font-size: 9px; font-weight: 600; color: #c8d0da; letter-spacing: 0.04em; width: 18px; flex-shrink: 0; text-align: right; }
+.sr3-stage-icon { flex-shrink: 0; width: 20px; height: 20px; color: #c8d0da; transition: color 0.18s; }
+.sr3-stage-name { flex: 1; font-size: 13px; font-weight: 400; color: var(--near-blk); transition: color 0.18s; }
+.sr3-stage-dur { font-family: var(--mono); font-size: 9px; color: var(--muted); }
+.sr3-detail { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.32s ease, opacity 0.26s ease; }
+.sr3-row.active .sr3-detail { max-height: 150px; opacity: 1; }
+.sr3-detail-inner { background: rgba(226,232,240,0.42); border-radius: 3px; margin: 0 0 12px 46px; padding: 11px 14px; display: flex; gap: 11px; align-items: flex-start; }
+.sr3-detail-icon { flex-shrink: 0; width: 16px; height: 16px; color: var(--b3); margin-top: 2px; }
+.sr3-detail-text { font-size: 11px; font-weight: 300; color: var(--warm); line-height: 1.65; }
+.sr3-footer { padding-top: 16px; border-top: 1px solid var(--line); font-size: 10.5px; font-weight: 300; color: var(--muted); }
 
 /* ── SR4: INCLUSION TURN ── */
 /* uses .slide.ink — no extra CSS needed */
@@ -1438,54 +1435,61 @@ body {
 
 <!-- ══ SR3: TRAINING MODULE ══ -->
 <div class="slide grid" id="sr3">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>Rollout · Basic Training</div>
-  <h2 class="h1" style="font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:6px">Our approach to training.</h2>
-  <p style="font-size:13px;font-weight:300;color:var(--muted);margin-bottom:22px">Hands-on and lab style. Click any stage to see what happens.</p>
-  <div class="sr3-cards-row">
-    <div class="sr3-card" id="sr3-c1" onclick="sr3Select(0)">
-      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="5" y="6" width="30" height="28" rx="2"/>
-        <line x1="11" y1="15" x2="29" y2="15"/>
-        <line x1="11" y1="21" x2="29" y2="21"/>
-        <line x1="11" y1="27" x2="22" y2="27"/>
-      </svg>
-      <div class="sr3-card-label">Explain</div>
-      <div class="sr3-card-dur">~20 min</div>
-    </div>
-    <div class="sr3-card" id="sr3-c2" onclick="sr3Select(1)">
-      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="20" cy="20" r="13"/>
-        <polyline points="14,20 18,24 26,16"/>
-      </svg>
-      <div class="sr3-card-label">Exercise</div>
-      <div class="sr3-card-dur">~30 min</div>
-    </div>
-    <div class="sr3-card" id="sr3-c3" onclick="sr3Select(2)">
-      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="20" cy="13" r="5"/>
-        <path d="M10 34 Q10 26 20 26 Q30 26 30 34"/>
-        <circle cx="9" cy="15" r="3.5"/>
-        <path d="M3 34 Q3 28 9 28"/>
-        <circle cx="31" cy="15" r="3.5"/>
-        <path d="M37 34 Q37 28 31 28"/>
-      </svg>
-      <div class="sr3-card-label">Group</div>
-      <div class="sr3-card-dur">~20 min</div>
-    </div>
-    <div class="sr3-card" id="sr3-c4" onclick="sr3Select(3)">
-      <svg class="sr3-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="30" cy="10" r="4"/>
-        <circle cx="10" cy="20" r="4"/>
-        <circle cx="30" cy="30" r="4"/>
-        <line x1="14" y1="18" x2="26" y2="12"/>
-        <line x1="14" y1="22" x2="26" y2="28"/>
-      </svg>
-      <div class="sr3-card-label">Share</div>
-      <div class="sr3-card-dur">~20 min</div>
+  <h2 class="h1" style="font-size:clamp(1.5rem,2.2vw,1.9rem);margin-bottom:12px">Our approach: Explain, Exercise, Group, Share.</h2>
+  <div class="sr3-example">Example: a customer success manager building an assistant that drafts client check-in emails, in their voice, with their client list, in the format their team uses.</div>
+  <div class="sr3-center">
+    <div class="sr3-timeline">
+      <div class="sr3-row active" id="sr3-r1">
+        <div class="sr3-stage-row" onclick="sr3Select(0)">
+          <div class="sr3-stage-num">01</div>
+          <svg class="sr3-stage-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="30" height="28" rx="2"/><line x1="11" y1="15" x2="29" y2="15"/><line x1="11" y1="21" x2="29" y2="21"/><line x1="11" y1="27" x2="22" y2="27"/></svg>
+          <div class="sr3-stage-name">Explain</div>
+          <div class="sr3-stage-dur">~20 min</div>
+        </div>
+        <div class="sr3-detail"><div class="sr3-detail-inner">
+          <svg class="sr3-detail-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="30" height="28" rx="2"/><line x1="11" y1="15" x2="29" y2="15"/><line x1="11" y1="21" x2="29" y2="21"/><line x1="11" y1="27" x2="22" y2="27"/></svg>
+          <div class="sr3-detail-text">The room learns what an LLM actually is: stateless, probabilistic, blind to your business until you give it context. Context is the lever that makes the same model produce wildly different output. Walk through Projects, Custom GPTs, custom instructions, and knowledge files.</div>
+        </div></div>
+      </div>
+      <div class="sr3-row" id="sr3-r2">
+        <div class="sr3-stage-row" onclick="sr3Select(1)">
+          <div class="sr3-stage-num">02</div>
+          <svg class="sr3-stage-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="13"/><polyline points="14,20 18,24 26,16"/></svg>
+          <div class="sr3-stage-name">Exercise</div>
+          <div class="sr3-stage-dur">~30 min</div>
+        </div>
+        <div class="sr3-detail"><div class="sr3-detail-inner">
+          <svg class="sr3-detail-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="13"/><polyline points="14,20 18,24 26,16"/></svg>
+          <div class="sr3-detail-text">The participant picks a real task from their role and builds a Claude Project with their tone of voice in the instructions, their client roster as a knowledge file, and their team's email format as a reference document. They run it, then compare it to the same task done in a raw chat with no context. The difference is the lesson.</div>
+        </div></div>
+      </div>
+      <div class="sr3-row" id="sr3-r3">
+        <div class="sr3-stage-row" onclick="sr3Select(2)">
+          <div class="sr3-stage-num">03</div>
+          <svg class="sr3-stage-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="13" r="5"/><path d="M10 34 Q10 26 20 26 Q30 26 30 34"/><circle cx="9" cy="15" r="3.5"/><path d="M3 34 Q3 28 9 28"/><circle cx="31" cy="15" r="3.5"/><path d="M37 34 Q37 28 31 28"/></svg>
+          <div class="sr3-stage-name">Group</div>
+          <div class="sr3-stage-dur">~20 min</div>
+        </div>
+        <div class="sr3-detail"><div class="sr3-detail-inner">
+          <svg class="sr3-detail-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="13" r="5"/><path d="M10 34 Q10 26 20 26 Q30 26 30 34"/><circle cx="9" cy="15" r="3.5"/><path d="M3 34 Q3 28 9 28"/><circle cx="31" cy="15" r="3.5"/><path d="M37 34 Q37 28 31 28"/></svg>
+          <div class="sr3-detail-text">Each table, four or five people from different roles, shares what they built. The variety surfaces quickly: someone built something close to the example and someone else built something none of the others had thought of. The conversation finds which team workflows could benefit from the same approach.</div>
+        </div></div>
+      </div>
+      <div class="sr3-row" id="sr3-r4">
+        <div class="sr3-stage-row" onclick="sr3Select(3)">
+          <div class="sr3-stage-num">04</div>
+          <svg class="sr3-stage-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><circle cx="10" cy="20" r="4"/><circle cx="30" cy="30" r="4"/><line x1="14" y1="18" x2="26" y2="12"/><line x1="14" y1="22" x2="26" y2="28"/></svg>
+          <div class="sr3-stage-name">Share</div>
+          <div class="sr3-stage-dur">~20 min</div>
+        </div>
+        <div class="sr3-detail"><div class="sr3-detail-inner">
+          <svg class="sr3-detail-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="4"/><circle cx="10" cy="20" r="4"/><circle cx="30" cy="30" r="4"/><line x1="14" y1="18" x2="26" y2="12"/><line x1="14" y1="22" x2="26" y2="28"/></svg>
+          <div class="sr3-detail-text">Each table nominates a standout. The facilitator maps the work back to the architecture: which components were used, what was missing. The room sees the pattern, and three or four participants leave knowing they could build the same thing this week.</div>
+        </div></div>
+      </div>
     </div>
   </div>
-  <div class="sr3-detail-strip" id="sr3-strip"></div>
-  <div class="sr3-closing-row" id="sr3-closing">Incorporates solo work and group activity to give everyone a voice. Performed with Capable AI's tasks and your model of choice — we recommend business accounts.</div>
+  <div class="sr3-footer">Every module of every training session runs this same four-stage shape.</div>
 </div>
 
 <!-- ══ SR4: INCLUSION TURN ══ -->
@@ -1833,49 +1837,27 @@ function reverseSR2() {
 
 // ── SR3: TRAINING MODULE ──
 const SR3_IDX = 13;
-let sr3Step = 0;
-let sr3ActiveCard = -1;
-const sr3Details = [
-  "What LLMs actually are — stateless, probabilistic, and blind to your business until you give them context. The three levers: instructions, reference material, and persistent state. A walkthrough of the product features that bundle these together.",
-  "Each participant picks a real task from their actual role and builds their own Project or Custom GPT with custom instructions and reference material. They run real inputs through it and compare the output to the same task done without any context setup.",
-  "Small groups share what they built and what worked. They discuss where context made the biggest difference, surface who's already doing this informally, and identify which team workflows could benefit from the same approach.",
-  "Each group nominates one standout example to share back. The facilitator surfaces common patterns, maps the work back to the architectural components, and previews what Advanced Training would add."
-];
+let sr3Step = 1;
+let sr3ActiveCard = 0;
 function resetSR3() {
-  sr3Step = 0; sr3ActiveCard = -1;
-  [1,2,3,4].forEach(i => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.remove('active'); });
-  const strip = document.getElementById('sr3-strip');
-  if (strip) { strip.classList.remove('on'); strip.textContent = ''; }
-  const closing = document.getElementById('sr3-closing');
-  if (closing) closing.classList.remove('on');
+  sr3Step = 1; sr3ActiveCard = 0;
+  sr3Select(0);
 }
 function sr3Select(idx) {
-  [1,2,3,4].forEach((i,j) => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.toggle('active', j === idx); });
-  const strip = document.getElementById('sr3-strip');
-  strip.textContent = sr3Details[idx];
-  strip.classList.add('on');
+  ['sr3-r1','sr3-r2','sr3-r3','sr3-r4'].forEach((id, j) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('active', j === idx);
+  });
   sr3ActiveCard = idx;
   if (sr3Step <= idx) sr3Step = idx + 1;
 }
 function advanceSR3() {
   if (sr3Step < 4) { sr3Select(sr3Step); return; }
-  if (sr3Step === 4) { document.getElementById('sr3-closing').classList.add('on'); sr3Step++; return; }
   go(cur + 1);
 }
 function reverseSR3() {
-  if (sr3Step > 4) {
-    document.getElementById('sr3-closing').classList.remove('on'); sr3Step--;
-  } else if (sr3Step > 1) {
-    sr3Step--;
-    sr3Select(sr3Step - 1);
-  } else if (sr3Step === 1) {
-    sr3Step = 0; sr3ActiveCard = -1;
-    [1,2,3,4].forEach(i => { const c = document.getElementById('sr3-c'+i); if (c) c.classList.remove('active'); });
-    const strip = document.getElementById('sr3-strip');
-    strip.classList.remove('on');
-  } else {
-    go(cur - 1);
-  }
+  if (sr3Step > 1) { sr3Step--; sr3Select(sr3Step - 1); }
+  else { go(cur - 1); }
 }
 
 // ── READINESS B: RFP WORKFLOW ──
@@ -2301,7 +2283,7 @@ document.addEventListener('click', e => {
     go(cur + 1); return;
   }
   if (cur === SR2_IDX) { if (e.target.closest('#sr2 .sr2-card')) return; if (e.target.closest('.sr2-mod-card')) return; advanceSR2(); return; }
-  if (cur === SR3_IDX) { if (e.target.closest('.sr3-card')) return; advanceSR3(); return; }
+  if (cur === SR3_IDX) { if (e.target.closest('.sr3-stage-row')) return; advanceSR3(); return; }
   if (cur !== S5_IDX) { go(cur + 1); return; }
   if (e.target.closest('#s5-right')) return; // click inside panel: do nothing
   const nodeEl = e.target.closest('#s5 .s5-node');

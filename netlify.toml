@@ -1,2 +1,3 @@
 [build]
   publish = "website"
+  ignore = "git diff --quiet HEAD^ HEAD -- website/"
